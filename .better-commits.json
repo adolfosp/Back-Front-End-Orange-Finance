@@ -73,6 +73,22 @@
         "initial_value": "",
         "options": [
             {
+                "value": "domain",
+                "label": "domain"
+            },
+            {
+                "value": "contracts",
+                "label": "contracts"
+            },
+            {
+                "value": "application",
+                "label": "application"
+            },
+            {
+                "value": "infrascructure",
+                "label": "infrascructure"
+            },
+            {
                 "value": "",
                 "label": "none"
             }
