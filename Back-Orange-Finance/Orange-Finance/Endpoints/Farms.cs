@@ -10,6 +10,6 @@ public static class Farms
         farms.MapGet("", null);
         farms.MapGet("/{id}", null);
 
-
+        //TODO: read repository, write repository, IDataEntity
     }
 }

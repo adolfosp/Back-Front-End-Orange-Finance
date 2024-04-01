@@ -1,18 +1,9 @@
-﻿namespace OrangeFinance.Application.Farms.Commands.CreateFarm;
+﻿using ErrorOr;
 
-public record CreateFarmCommand()
-{
-    public string Name { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public Coordinate Location { get; init; } = new();
-    public string Size { get; init; } = string.Empty;
-    public string Type { get; init; } = string.Empty;
-    public string Image { get; init; } = string.Empty;
-}
+using MediatR;
 
+using OrangeFinance.Domain.Farms.ValueObjects;
 
-public class Coordinate
-{
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
-}
+namespace OrangeFinance.Application.Farms.Commands.CreateFarm;
+
+public record CreateFarmCommand(string Name, string Description, Coordinate Location, string Size, string Type, string Image) : IRequest<ErrorOr<string>>;
