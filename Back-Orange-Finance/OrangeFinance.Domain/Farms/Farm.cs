@@ -6,11 +6,12 @@ namespace OrangeFinance.Domain.Farms;
 
 public sealed class Farm : AggregateRoot<FarmId, Guid>
 {
-    private Farm(string name, string description, Coordinate location, string size, string type, string image)
+    private Farm(FarmId id, string name, string description, double longitude, double latitude, string size, string type, string image)
     {
+        Id = id;
         Name = name;
         Description = description;
-        Location = location;
+        Location = new Coordinate(latitude: latitude, longitude: longitude);
         Size = size;
         Type = type;
         Image = image;
@@ -23,9 +24,9 @@ public sealed class Farm : AggregateRoot<FarmId, Guid>
     public string Type { get; private set; }
     public string Image { get; private set; }
 
-    public static Farm Create(string name, string description, Coordinate location, string size, string type, string image)
+    public static Farm Create(string name, string description, double longitude, double latitude, string size, string type, string image)
     {
-        var farm = new Farm(name, description, location, size, type, image);
+        var farm = new Farm(id: FarmId.CreateUnique(), name: name, description: description, longitude: longitude, latitude: latitude, size: size, type: type, image: image);
         farm.AddDomainEvent(new FarmCreated(farm));
         return farm;
     }

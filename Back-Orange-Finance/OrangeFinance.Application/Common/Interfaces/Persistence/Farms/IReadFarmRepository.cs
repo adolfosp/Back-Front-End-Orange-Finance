@@ -1,9 +1,9 @@
-﻿using OrangeFinance.Domain.Farms;
+﻿using OrangeFinance.Domain.Farms.Models;
 
 namespace OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 
 public interface IReadFarmRepository
 {
-    Task<Farm> GetByIdAsync(Guid id);
-    Task<IEnumerable<Farm>> GetAllAsync();
+    Task<FarmModel> GetByIdAsync(Guid id);
+    Task<IEnumerable<FarmModel>> GetAllAsync();
 }

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 using OrangeFinance.Http;
 
-namespace OrangeFinance.Common;
+namespace OrangeFinance.Common.Erros;
 
 public class OrangeFinanceProblemDetailsFactory : ProblemDetailsFactory
 {

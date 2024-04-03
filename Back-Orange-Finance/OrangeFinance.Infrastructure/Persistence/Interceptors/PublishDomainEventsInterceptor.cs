@@ -8,6 +8,9 @@ using OrangeFinance.Domain.Common.Models;
 
 namespace OrangeFinance.Infrastructure.Persistence.Interceptors;
 
+/// <summary>
+/// Class to intercept the saving changes of the database context and publish the domain events if the class on DBSet be an Entity and not a Model.
+/// </summary>
 public class PublishDomainEventsInterceptor : SaveChangesInterceptor
 {
     private readonly IPublisher _mediator;

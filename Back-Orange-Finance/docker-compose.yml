@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  orangefinance:
+    image: ${DOCKER_REGISTRY-}orangefinance
+    build:
+      context: .
+      dockerfile: Orange-Finance/Dockerfile
