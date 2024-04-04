@@ -1,5 +1,6 @@
 using OrangeFinance;
 using OrangeFinance.Application;
+using OrangeFinance.Common.Mapping.MongoDB;
 using OrangeFinance.Endpoints;
 using OrangeFinance.Extensions;
 using OrangeFinance.Infrastructure;
@@ -14,6 +15,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddProblemDetails();
 
 builder.RegisterServices();
+
+MongoDBMappingConfig.RegisterMappings();
 
 var app = builder.Build();
 

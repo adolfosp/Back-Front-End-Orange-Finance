@@ -4,5 +4,5 @@ namespace OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 
 public interface IWriteDomainEventsRepository
 {
-    Task AddAsync(FarmCreated notification);
+    Task AddAsync(FarmCreated @event);
 }

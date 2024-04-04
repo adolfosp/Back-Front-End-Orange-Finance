@@ -16,9 +16,8 @@ internal sealed class DomainEventsRepository : IWriteDomainEventsRepository
         _context = context;
     }
 
-    public async Task AddAsync(FarmCreated domainEvent)
+    public async Task AddAsync(FarmCreated @event)
     {
-
-        await _context.MongoDB.GetCollection<BsonDocument>(_collection).InsertOneAsync(BsonDocument.Create(domainEvent));
+        await _context.MongoDB.GetCollection<BsonDocument>(_collection).InsertOneAsync(@event.ToBsonDocument());
     }
 }

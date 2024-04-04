@@ -27,7 +27,7 @@ public sealed class Farm : AggregateRoot<FarmId, Guid>
     public static Farm Create(string name, string description, double longitude, double latitude, string size, string type, string image)
     {
         var farm = new Farm(id: FarmId.CreateUnique(), name: name, description: description, longitude: longitude, latitude: latitude, size: size, type: type, image: image);
-        farm.AddDomainEvent(new FarmCreated(farm));
+        farm.AddDomainEvent(new FarmCreated(farm.Id.Value, farm.Name, farm.Description, farm.Location.Longitude, farm.Location.Latitude, farm.Size, farm.Type, farm.Image));
         return farm;
     }
 

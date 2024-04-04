@@ -1,6 +1,6 @@
 ﻿namespace OrangeFinance.Infrastructure.Persistence.Models;
 
-public class MongoDBSettings
+internal class MongoDBSettings
 {
     public static string SectionName { get => "MongoDBSettings"; }
     public string ConnectionString { get; set; }

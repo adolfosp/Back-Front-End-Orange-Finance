@@ -16,8 +16,8 @@ public sealed class FarmCreatedEventHandler : INotificationHandler<FarmCreated>
 
     public Task Handle(FarmCreated notification, CancellationToken cancellationToken)
     {
-#warning Validate if is the correct way to insert
-        _writeDomainEventsRepository.AddAsync(notification);
+#warning Add queue to send errors with the event
+        _ = _writeDomainEventsRepository.AddAsync(notification);
         return Task.CompletedTask;
     }
 }
