@@ -28,4 +28,8 @@
     <ProjectReference Include="..\OrangeFinance.Infrastructure\OrangeFinance.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GraphQL\Farms\Mutations\" />
+  </ItemGroup>
+
 </Project>

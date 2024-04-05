@@ -1,4 +1,7 @@
-﻿namespace OrangeFinance.Extensions;
+﻿using GraphQL.Server.Ui.Playground;
+using GraphQL.Types;
+
+namespace OrangeFinance.Extensions;
 
 public static class Configuration
 {
@@ -19,5 +22,17 @@ public static class Configuration
         app.UseExceptionHandler("/error");
 
         app.UseHttpsRedirection();
+    }
+
+    public static void RegisterGraphQL(this WebApplication app)
+    {
+        app.UseGraphQL<ISchema>();
+        app.UseGraphQLPlayground("/",
+                         new PlaygroundOptions
+                         {
+                             GraphQLEndPoint = "/graphql",
+                             SubscriptionsEndPoint = "/graphql",
+                         });
+
     }
 }

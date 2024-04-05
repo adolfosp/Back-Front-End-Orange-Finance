@@ -1,4 +1,6 @@
-﻿using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
+﻿using Microsoft.EntityFrameworkCore;
+
+using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Domain.Farms.Models;
 using OrangeFinance.Infrastructure.Persistence;
 
@@ -24,14 +26,14 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<FarmModel>> GetAllAsync()
+    public async Task<IEnumerable<FarmModel>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Farms.ToListAsync();
     }
 
-    public Task<FarmModel> GetByIdAsync(Guid id)
+    public async Task<FarmModel> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Farms.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public Task<FarmModel> UpdateAsync(FarmModel farm, CancellationToken cancellationToken)

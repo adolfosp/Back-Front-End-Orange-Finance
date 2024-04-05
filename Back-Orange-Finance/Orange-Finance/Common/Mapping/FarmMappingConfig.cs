@@ -31,7 +31,7 @@ public class FarmMappingConfig : IRegister
                                                       src.Image));
 
         config.NewConfig<Farm, FarmResponse>()
-       .ConstructUsing(src => new FarmResponse(src.Id.Value.ToString(),
+            .ConstructUsing(src => new FarmResponse(src.Id.Value,
                                                 src.Name,
                                                 src.Description,
                                                 src.Location.Longitude,
@@ -39,6 +39,16 @@ public class FarmMappingConfig : IRegister
                                                 src.Size,
                                                 src.Type,
                                                 src.Image));
+
+        config.NewConfig<FarmModel, FarmResponse>()
+            .ConstructUsing(src => new FarmResponse(src.Id,
+                                               src.Name,
+                                               src.Description,
+                                               src.Longitude,
+                                               src.Latitude,
+                                               src.Size,
+                                               src.Type,
+                                               src.Image));
 
     }
 }

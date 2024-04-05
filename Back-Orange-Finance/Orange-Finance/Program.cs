@@ -14,6 +14,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddProblemDetails();
 
+
 builder.RegisterServices();
 
 MongoDBMappingConfig.RegisterMappings();
@@ -25,5 +26,6 @@ app.RegisterMiddlewares();
 app.RegisterUserEndpoints();
 
 app.EnsureCreatedDatabase();
+app.RegisterGraphQL();
 
 app.Run();
