@@ -1,5 +1,6 @@
 ﻿using GraphQL.Types;
 
+using OrangeFinance.GraphQL.Farms.Mutations;
 using OrangeFinance.GraphQL.Farms.Queries;
 
 
@@ -10,5 +11,7 @@ public class FarmSchema : Schema
     public FarmSchema(IServiceProvider resolver) : base(resolver)
     {
         Query = resolver.GetRequiredService<FarmQueryGraph>();
+        Mutation = resolver.GetRequiredService<FarmMutationGraph>();
+
     }
 }

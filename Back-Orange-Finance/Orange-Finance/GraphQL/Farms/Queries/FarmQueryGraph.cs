@@ -9,15 +9,15 @@ using OrangeFinance.GraphQL.Farms.Types;
 
 namespace OrangeFinance.GraphQL.Farms.Queries;
 
-public class FarmQueryGraph : ObjectGraphType
+public sealed class FarmQueryGraph : ObjectGraphType
 {
     public FarmQueryGraph(IReadFarmRepository readFarmRepository, IMapper mapper)
     {
-        Field<ListGraphType<FarmType>>("farms")
+        Field<ListGraphType<FarmResponseType>>("farms")
                 .Description("Get all farms")
                 .ResolveAsync(async context => mapper.Map<IEnumerable<FarmResponse>>(await readFarmRepository.GetAllAsync()));
 
-        Field<FarmType>(
+        Field<FarmResponseType>(
            "farmById")
             .Description("Get a single farm by ID")
             .Argument<NonNullGraphType<IdGraphType>>("id", "The ID of the farm")

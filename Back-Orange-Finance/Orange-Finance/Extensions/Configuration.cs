@@ -30,6 +30,11 @@ public static class Configuration
         app.UseGraphQLPlayground("/",
                          new PlaygroundOptions
                          {
+                             PlaygroundSettings = new Dictionary<string, object>
+                             {
+                                 ["editor.theme"] = "light",
+                                 ["editor.cursorShape"] = "line",
+                             },
                              GraphQLEndPoint = "/graphql",
                              SubscriptionsEndPoint = "/graphql",
                          });

@@ -5,6 +5,7 @@ using OrangeFinance.Contracts.Farms;
 using OrangeFinance.Domain.Farms;
 using OrangeFinance.Domain.Farms.Models;
 using OrangeFinance.Domain.Farms.ValueObjects;
+using OrangeFinance.GraphQL.Farms.Types;
 
 namespace OrangeFinance.Common.Mapping;
 
@@ -39,6 +40,9 @@ public class FarmMappingConfig : IRegister
                                                 src.Size,
                                                 src.Type,
                                                 src.Image));
+
+        config.NewConfig<Farm, FarmResponseType>()
+           .ConstructUsing(src => new FarmResponseType());
 
         config.NewConfig<FarmModel, FarmResponse>()
             .ConstructUsing(src => new FarmResponse(src.Id,

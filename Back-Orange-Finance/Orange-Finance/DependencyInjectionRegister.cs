@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 using OrangeFinance.Common.Erros;
 using OrangeFinance.Common.Mapping;
+using OrangeFinance.GraphQL.Farms.Mutations;
 using OrangeFinance.GraphQL.Farms.Queries;
 using OrangeFinance.GraphQL.Farms.Schemas;
 using OrangeFinance.GraphQL.Farms.Types;
@@ -24,9 +25,16 @@ public static class DependencyInjectionRegister
 
     private static IServiceCollection AddGraphQL(this IServiceCollection services)
     {
-        services.AddGraphQL(b => b.AddSystemTextJson());
-        services.AddScoped<FarmType>();
+        services.AddGraphQL(options =>
+        {
+            options.AddSystemTextJson();
+            options.UseApolloTracing(true);
+
+        });
+
+        services.AddScoped<FarmInputType>();
         services.AddScoped<FarmQueryGraph>();
+        services.AddScoped<FarmMutationGraph>();
         services.AddScoped<ISchema, FarmSchema>(provider => new FarmSchema(new SelfActivatingServiceProvider(provider)));
         return services;
     }
