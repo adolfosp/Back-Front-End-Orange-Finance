@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Domain.Farms.Models;
 using OrangeFinance.Infrastructure.Persistence;
@@ -9,10 +9,11 @@ namespace OrangeFinance.Infrastructure.Repositories;
 internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
 {
     private readonly OrangeFinanceDbContext _dbContext;
-
-    public FarmRepository(OrangeFinanceDbContext dbContext)
+    private readonly ICacheRepository _cacheRepository;
+    public FarmRepository(OrangeFinanceDbContext dbContext, ICacheRepository cacheRepository)
     {
         _dbContext = dbContext;
+        _cacheRepository = cacheRepository;
     }
 
     public async Task AddAsync(FarmModel farm, CancellationToken cancellationToken)

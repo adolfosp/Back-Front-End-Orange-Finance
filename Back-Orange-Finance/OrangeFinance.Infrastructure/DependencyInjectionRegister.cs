@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Infrastructure.Persistence;
@@ -22,11 +22,15 @@ public static class DependencyInjectionRegister
             options.UseSqlServer("Server=sqlserver,1433;Trusted_Connection=false;Encrypt=False;Database=Orange_Finance_Web;User Id=sa;Password=SqlServer2022!"));
 
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
+        services.AddSingleton<RedisDBContext>();
+        services.AddSingleton<ICacheRepository, CacheRepository>();
 
         services.AddScoped<PublishDomainEventsInterceptor>();
         services.AddScoped<IReadFarmRepository, FarmRepository>();
         services.AddScoped<IWriteFarmRepository, FarmRepository>();
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
+
+
 
         return services;
     }

@@ -26,6 +26,13 @@ public sealed class FarmMutationGraph : ObjectGraphType<object>
                     var farmRequest = context.GetArgument<CreateFarmRequest>("farm");
                     var command = mapper.Map<CreateFarmCommand>(farmRequest);
                     var response = await mediator.Send(command);
+
+                    if (response.IsError)
+                    {
+                        context.Errors.Add(new ExecutionError(response.FirstError.Description));
+                        return null;
+                    }
+
                     return mapper.Map<FarmResponse>(response.Value);
                 }
                 catch (Exception ex)
