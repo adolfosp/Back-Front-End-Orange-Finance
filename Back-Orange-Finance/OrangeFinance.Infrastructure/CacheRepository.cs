@@ -1,6 +1,7 @@
-﻿using OrangeFinance.Application.Common.Interfaces;
+﻿using System.Text.Json;
+
+using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Infrastructure.Persistence;
-using System.Text.Json;
 
 namespace OrangeFinance.Infrastructure
 {
@@ -14,6 +15,9 @@ namespace OrangeFinance.Infrastructure
 
         public async Task setCache<T>(string key, T value)
         {
+            if (value is null)
+                return;
+
             var valueSerialized = JsonSerializer.Serialize(value);
 
             await _context.Database.SetAddAsync(key, valueSerialized);
@@ -21,13 +25,13 @@ namespace OrangeFinance.Infrastructure
 
         public async Task<T?> getCache<T>(string key)
         {
-            var exist = await _context.Database.KeyExistsAsync(key);
-
-            if (!exist) return default(T?);
-
-            var response = await _context.Database.StringGetAsync(key);
-
-            return JsonSerializer.Deserialize<T>(response!) ?? default;
+            if (await _context.Database.KeyExistsAsync(key))
+            {
+                var value = await _context.Database.SetMembersAsync(key);
+                var valueDeserialized = JsonSerializer.Deserialize<T>(value.FirstOrDefault());
+                return valueDeserialized;
+            }
+            return default;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Domain.Farms.Models;
@@ -10,6 +11,8 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
 {
     private readonly OrangeFinanceDbContext _dbContext;
     private readonly ICacheRepository _cacheRepository;
+    private const string CacheKey = "Farms";
+
     public FarmRepository(OrangeFinanceDbContext dbContext, ICacheRepository cacheRepository)
     {
         _dbContext = dbContext;
@@ -29,7 +32,21 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
 
     public async Task<IEnumerable<FarmModel>> GetAllAsync()
     {
-        return await _dbContext.Farms.ToListAsync();
+        var cacheResult = await _cacheRepository.getCache<IEnumerable<FarmModel>>(CacheKey);
+
+        if (cacheResult is null)
+        {
+            var response = await _dbContext.Farms.ToListAsync();
+            if (response.Count() > 0)
+                await _cacheRepository.setCache(CacheKey, response);
+
+            return response;
+        }
+        else
+        {
+            return cacheResult;
+        }
+
     }
 
     public async Task<FarmModel> GetByIdAsync(Guid id)
