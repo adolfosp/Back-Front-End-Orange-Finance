@@ -5,6 +5,7 @@ using MapsterMapper;
 
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Contracts.Farms;
+using OrangeFinance.Domain.Common.Models;
 using OrangeFinance.GraphQL.Farms.Types;
 
 namespace OrangeFinance.GraphQL.Farms.Queries;
@@ -15,7 +16,16 @@ public sealed class FarmQueryGraph : ObjectGraphType
     {
         Field<ListGraphType<FarmResponseType>>("farms")
                 .Description("Get all farms")
-                .ResolveAsync(async context => mapper.Map<IEnumerable<FarmResponse>>(await readFarmRepository.GetAllAsync()));
+                .Argument<NonNullGraphType<IntGraphType>>("page", "index of current page")
+                .Argument<NonNullGraphType<IntGraphType>>("pageSize", "how many register")
+                .ResolveAsync(async context =>
+                {
+                    var page = context.GetArgument<int>("page");
+                    var pageSize = context.GetArgument<int>("pageSize");
+                    var pagination = new Pagination(page, pageSize);
+
+                    return mapper.Map<IEnumerable<FarmResponse>>(await readFarmRepository.GetAllAsync(pagination));
+                });
 
         Field<FarmResponseType>(
            "farmById")

@@ -17,8 +17,8 @@ public sealed class FarmQueryHandler : IRequestHandler<FarmQuery, ErrorOr<IEnume
 
     public async Task<ErrorOr<IEnumerable<FarmModel>>> Handle(FarmQuery request, CancellationToken cancellationToken)
     {
-        var teste = await _readFarmRepository.GetAllAsync();
+        var farms = await _readFarmRepository.GetAllAsync(pagination: request.Pagination);
 
-        return teste.ToList();
+        return farms.ToList();
     }
 }

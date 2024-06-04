@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
+using OrangeFinance.Domain.Common.Models;
 using OrangeFinance.Domain.Farms.Models;
+using OrangeFinance.Infrastructure.Extensions;
 using OrangeFinance.Infrastructure.Persistence;
 
 namespace OrangeFinance.Infrastructure.Repositories;
@@ -10,13 +11,10 @@ namespace OrangeFinance.Infrastructure.Repositories;
 internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
 {
     private readonly OrangeFinanceDbContext _dbContext;
-    private readonly ICacheRepository _cacheRepository;
-    private const string CacheKey = "Farms";
 
-    public FarmRepository(OrangeFinanceDbContext dbContext, ICacheRepository cacheRepository)
+    public FarmRepository(OrangeFinanceDbContext dbContext)
     {
         _dbContext = dbContext;
-        _cacheRepository = cacheRepository;
     }
 
     public async Task AddAsync(FarmModel farm, CancellationToken cancellationToken)
@@ -30,23 +28,9 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<FarmModel>> GetAllAsync()
+    public async Task<IEnumerable<FarmModel>> GetAllAsync(Pagination pagination)
     {
-        var cacheResult = await _cacheRepository.getCache<IEnumerable<FarmModel>>(CacheKey);
-
-        if (cacheResult is null)
-        {
-            var response = await _dbContext.Farms.ToListAsync();
-            if (response.Count() > 0)
-                await _cacheRepository.setCache(CacheKey, response);
-
-            return response;
-        }
-        else
-        {
-            return cacheResult;
-        }
-
+        return await _dbContext.Farms.Paginate(pagination).ToListAsync();
     }
 
     public async Task<FarmModel> GetByIdAsync(Guid id)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrangeFinance.Application.Farms.Commands.CreateFarm;
 using OrangeFinance.Application.Farms.Queries.Farms;
 using OrangeFinance.Contracts.Farms;
+using OrangeFinance.Domain.Common.Models;
 using OrangeFinance.Extensions;
 
 namespace OrangeFinance.Endpoints;
@@ -31,9 +32,9 @@ public static class Farms
           .Produces(statusCode: 201);
 
 
-        farms.MapGet("", async (IMediator mediator, IMapper mapper) =>
+        farms.MapGet("", async (IMediator mediator, IMapper mapper, [AsParameters] Pagination pagination) =>
         {
-            var result = await mediator.Send(new FarmQuery());
+            var result = await mediator.Send(new FarmQuery(pagination));
 
             return result.Match(value => Results.Ok(mapper.Map<List<FarmResponse>>(value)),
                                 errors => errors.GetProblemsDetails());
