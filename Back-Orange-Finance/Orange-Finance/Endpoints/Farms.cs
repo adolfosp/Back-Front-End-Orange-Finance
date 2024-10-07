@@ -14,9 +14,10 @@ namespace OrangeFinance.Endpoints;
 
 public static class Farms
 {
-    public static void RegisterUserEndpoints(this IEndpointRouteBuilder routes)
+    public static void RegisterFarmEndpoints(this IEndpointRouteBuilder routes)
     {
-        var farms = routes.MapGroup("/api/farms");
+
+        var farms = routes.MapGroup("/farms");
 
         farms.MapPost("", async (IMediator mediator, IMapper mapper, [FromBody] CreateFarmRequest request) =>
         {
@@ -29,7 +30,8 @@ public static class Farms
                            errors => errors.GetProblemsDetails());
 
         }).Produces(statusCode: 400)
-          .Produces(statusCode: 201);
+          .Produces(statusCode: 201)
+          .MapToApiVersion(2);
 
 
         farms.MapGet("", async (IMediator mediator, IMapper mapper, [AsParameters] Pagination pagination) =>
@@ -39,6 +41,14 @@ public static class Farms
             return result.Match(value => Results.Ok(mapper.Map<List<FarmResponse>>(value)),
                                 errors => errors.GetProblemsDetails());
         }).Produces(statusCode: 400)
-          .Produces(statusCode: 200);
+          .Produces(statusCode: 200)
+          .MapToApiVersion(2);
+
+        farms.MapDelete("{id:int}", (int id) =>
+        {
+
+        }).Produces(statusCode: 400)
+          .Produces(statusCode: 200)
+          .MapToApiVersion(1);
     }
 }

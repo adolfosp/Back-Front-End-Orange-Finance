@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 using OrangeFinance.Application.Common.Behaviors;
+using OrangeFinance.Application.Security;
 
 namespace OrangeFinance.Application;
 
@@ -21,6 +22,9 @@ public static class DependencyInjectionRegister
             typeof(ValidationBehavior<,>));
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        services.AddScoped<SecurityService>();
+
         return services;
     }
 }

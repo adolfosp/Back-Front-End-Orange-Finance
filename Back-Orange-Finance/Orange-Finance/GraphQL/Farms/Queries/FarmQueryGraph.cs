@@ -35,7 +35,7 @@ public sealed class FarmQueryGraph : ObjectGraphType
             {
                 var id = context.GetArgument<Guid>("id");
                 var farm = await readFarmRepository.GetByIdAsync(id);
-                if (farm == null)
+                if (farm is null)
                 {
                     context.Errors.Add(new ExecutionError("Farm not found"));
                     return null;

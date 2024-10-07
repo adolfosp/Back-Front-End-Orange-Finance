@@ -20,26 +20,27 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
     public async Task AddAsync(FarmModel farm, CancellationToken cancellationToken)
     {
         _dbContext.Add(farm);
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Task DeleteAsync(Guid farmId, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid farmId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _dbContext.Farms.Where(x => x.Id == farmId).ExecuteDeleteAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<FarmModel>> GetAllAsync(Pagination pagination)
+    public async Task<IEnumerable<FarmModel?>> GetAllAsync(Pagination pagination)
     {
         return await _dbContext.Farms.Paginate(pagination).ToListAsync();
     }
 
-    public async Task<FarmModel> GetByIdAsync(Guid id)
+    public async Task<FarmModel?> GetByIdAsync(Guid id)
     {
         return await _dbContext.Farms.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<FarmModel> UpdateAsync(FarmModel farm, CancellationToken cancellationToken)
+    public async Task<bool> UpdateAsync(Guid farmId, FarmModel farm, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _dbContext.Entry(await _dbContext.Farms.FirstAsync(x => x.Id == farmId)).CurrentValues.SetValues(farm);
+        return (await _dbContext.SaveChangesAsync(cancellationToken)) > 0;
     }
 }

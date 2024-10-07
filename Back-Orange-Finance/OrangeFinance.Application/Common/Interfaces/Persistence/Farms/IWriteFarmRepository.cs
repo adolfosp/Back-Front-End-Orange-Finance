@@ -5,6 +5,6 @@ namespace OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 public interface IWriteFarmRepository
 {
     Task AddAsync(FarmModel farm, CancellationToken cancellationToken);
-    Task<FarmModel> UpdateAsync(FarmModel farm, CancellationToken cancellationToken);
+    Task<bool> UpdateAsync(Guid farmId, FarmModel farm, CancellationToken cancellationToken);
     Task DeleteAsync(Guid farmId, CancellationToken cancellationToken);
 }
