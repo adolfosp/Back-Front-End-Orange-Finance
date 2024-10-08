@@ -45,7 +45,6 @@ public sealed class SecurityService(IHttpClientFactory httpClientFactory, IConfi
     {
         try
         {
-            //Aplicar retry pattern
             //Aplicar origin
 
             var client = httpClientFactory.CreateClient("Back-Authentication");
