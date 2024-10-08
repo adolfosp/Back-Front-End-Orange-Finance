@@ -28,4 +28,5 @@ app.EnsureCreatedDatabase();
 app.RegisterGraphQL();
 app.RegisterApiVersion();
 
+
 app.Run();

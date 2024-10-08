@@ -21,6 +21,7 @@ public static class Security
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 201)
-          .MapToApiVersion(2);
+          .MapToApiVersion(1)
+          .WithOpenApi();
     }
 }

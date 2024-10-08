@@ -31,8 +31,8 @@ public static class Farms
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 201)
-          .MapToApiVersion(2);
-
+          .MapToApiVersion(1)
+          .WithOpenApi();
 
         farms.MapGet("", async (IMediator mediator, IMapper mapper, [AsParameters] Pagination pagination) =>
         {
@@ -42,13 +42,15 @@ public static class Farms
                                 errors => errors.GetProblemsDetails());
         }).Produces(statusCode: 400)
           .Produces(statusCode: 200)
-          .MapToApiVersion(2);
+          .MapToApiVersion(1)
+          .WithOpenApi();
 
         farms.MapDelete("{id:int}", (int id) =>
         {
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 200)
-          .MapToApiVersion(1);
+          .MapToApiVersion(1)
+          .WithOpenApi();
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 
 using OrangeFinance.Endpoints;
 
-using Swashbuckle.AspNetCore.SwaggerUI;
+using Scalar.AspNetCore;
 
 namespace OrangeFinance.Extensions;
 
@@ -32,8 +32,9 @@ public static class Configuration
             options.SubstituteApiVersionInUrl = true;
         });
 
-        builder.Services
-               .AddSwaggerGen(options =>
+        builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.AddSwaggerGen(options =>
                {
                    var provider = builder.Services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
 
@@ -52,8 +53,7 @@ public static class Configuration
                        }
 
                    }
-               }).AddEndpointsApiExplorer();
-
+               });
 
     }
 
@@ -62,30 +62,47 @@ public static class Configuration
         if (app.Environment.IsDevelopment())
         {
 
-            app.UseSwagger()
-               .UseSwaggerUI(options =>
-               {
-#warning "Código de exemplo para adicionar a documentação de todas as versões da API. Contém erro não solucionado porque aparece apenas a v1"
-                   /* 
-                        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "openapi/{documentName}.json";
+            });
 
-                       IReadOnlyList<ApiVersionDescription> apiVersionDescriptions = provider.ApiVersionDescriptions;
+            app.MapScalarApiReference(options =>
+            {
+                options
+                    .WithTitle("My custom API")
+                    .WithTheme(ScalarTheme.Alternate)
+                    .WithSidebar(true)
+                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+                    .WithPreferredScheme("ApiKey")
+                    .WithApiKeyAuthentication(x => x.Token = "my-api-key");
+            });
+            #region Exemplo antigo do swagger
+            //               .UseSwaggerUI(options =>
+            //               {
+            //#warning "Código de exemplo para adicionar a documentação de todas as versões da API. Contém erro não solucionado porque aparece apenas a v1"
+            //                   /* 
+            //                        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-                       foreach (ApiVersionDescription apiVersionDescription in apiVersionDescriptions)
-                       {
-                           options.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json", apiVersionDescription.GroupName.ToUpperInvariant());
+            //                       IReadOnlyList<ApiVersionDescription> apiVersionDescriptions = provider.ApiVersionDescriptions;
 
-                       }
-                    */
+            //                       foreach (ApiVersionDescription apiVersionDescription in apiVersionDescriptions)
+            //                       {
+            //                           options.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json", apiVersionDescription.GroupName.ToUpperInvariant());
 
-
-                   options.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1");
-                   options.SwaggerEndpoint($"/swagger/v2/swagger.json", "V2");
+            //                       }
+            //                    */
 
 
-                   options.DocExpansion(DocExpansion.List);
+            //                   options.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1");
+            //                   options.SwaggerEndpoint($"/swagger/v2/swagger.json", "V2");
 
-               });
+
+            //                   options.DocExpansion(DocExpansion.List);
+
+            //               });
+            #endregion
+
         }
         app.UseExceptionHandler("/error");
 
