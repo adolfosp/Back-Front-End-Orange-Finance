@@ -1,4 +1,5 @@
 ﻿using OrangeFinance.Domain.Common.Models;
+using OrangeFinance.Domain.Common.ValueObject;
 using OrangeFinance.Domain.Farms.Events;
 using OrangeFinance.Domain.Farms.ValueObjects;
 
@@ -6,7 +7,7 @@ namespace OrangeFinance.Domain.Farms;
 
 public sealed class Farm : AggregateRoot<FarmId, Guid>
 {
-    private Farm(FarmId id, string name, string description, double longitude, double latitude, string size, string type, string image)
+    private Farm(FarmId id, string name, string description, double longitude, double latitude, string size, string type, string image, Cnpj cnpj)
     {
         Id = id;
         Name = name;
@@ -15,6 +16,7 @@ public sealed class Farm : AggregateRoot<FarmId, Guid>
         Size = size;
         Type = type;
         Image = image;
+        Cnpj = cnpj;
     }
 
     public string Name { get; private set; }
@@ -23,10 +25,11 @@ public sealed class Farm : AggregateRoot<FarmId, Guid>
     public string Size { get; private set; }
     public string Type { get; private set; }
     public string Image { get; private set; }
+    public Cnpj Cnpj { get; private set; }
 
-    public static Farm Create(string name, string description, double longitude, double latitude, string size, string type, string image)
+    public static Farm Create(string name, string description, double longitude, double latitude, string size, string type, string image, Cnpj cnpj)
     {
-        var farm = new Farm(id: FarmId.CreateUnique(), name: name, description: description, longitude: longitude, latitude: latitude, size: size, type: type, image: image);
+        var farm = new Farm(id: FarmId.CreateUnique(), name: name, description: description, longitude: longitude, latitude: latitude, size: size, type: type, image: image, cnpj: cnpj);
         farm.AddDomainEvent(new FarmCreated(farm.Id.Value, farm.Name, farm.Description, farm.Location.Longitude, farm.Location.Latitude, farm.Size, farm.Type, farm.Image));
         return farm;
     }

@@ -1,19 +1,23 @@
-version: '3.4'
+version: '3.8'
 
 services:
   orangefinance:
     depends_on:
-       - sqlserver
+      - sqlserver
+      - cache
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
-      - "8080"
-      - "8081"
+      - "8080:8080"
+      - "8081:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      - app_network
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
@@ -22,14 +26,53 @@ services:
       MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
+    networks:
+      - app_network
+
+  jaeger:
+    image: jaegertracing/opentelemetry-all-in-one
+    container_name: jaeger
+    ports:
+      - "13133:13133" 
+      - "16686:16686"  
+      - "4317:4317"    
+    restart: unless-stopped
+    networks:
+      - app_network
+
   cache:
     image: redis:latest
     restart: always
     ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    volumes: 
+      - "6379:6379"
+    #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
       - cache:/data
+    networks:
+      - app_network
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    ports:
+      - "5341:5341"
+      - "8090:80"
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINUSERNAME=admin
+      - SEQ_FIRSTRUN_ADMINPASSWORD=senha_segura
+      - SEQ_ENABLEAUTHENTICATION=true
+    volumes:
+      - seq-data:/data
+      - seq-logs:/logs
+
 volumes:
+  seq-data:
+  seq-logs:
   cache:
     driver: local
+
+networks:
+  app_network:
+    driver: bridge

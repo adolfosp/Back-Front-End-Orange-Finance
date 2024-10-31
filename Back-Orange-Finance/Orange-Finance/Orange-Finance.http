@@ -1,6 +1,13 @@
-@Orange_Finance_HostAddress = http://localhost:5106
+@Orange_Finance_HostAddress = http://localhost:51541
 
 GET {{Orange_Finance_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Obter Token
+GET {{Orange_Finance_HostAddress}}/security/token
+Accept: application/json
+
+{
+  "email": "adolfo8799@gmail.com",
+  "password": "adolfo123"
+}

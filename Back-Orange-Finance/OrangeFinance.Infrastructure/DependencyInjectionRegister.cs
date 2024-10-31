@@ -14,16 +14,16 @@ namespace OrangeFinance.Infrastructure;
 
 public static class DependencyInjectionRegister
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         var mongoSettings = new MongoDBSettings();
-        configration.Bind(MongoDBSettings.SectionName, mongoSettings);
+        configuration.Bind(MongoDBSettings.SectionName, mongoSettings);
 
         var redisSettings = new RedisSettings();
-        configration.Bind(RedisSettings.SectionName, redisSettings);
+        configuration.Bind(RedisSettings.SectionName, redisSettings);
 
         var sqlServerSettings = new SqlServerSettings();
-        configration.Bind(SqlServerSettings.SectionName, sqlServerSettings);
+        configuration.Bind(SqlServerSettings.SectionName, sqlServerSettings);
 
         services.AddDbContext<OrangeFinanceDbContext>(options =>
             options.UseSqlServer(sqlServerSettings.ConnectionString));

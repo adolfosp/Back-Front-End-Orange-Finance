@@ -4,6 +4,7 @@ using System.Text;
 using ErrorOr;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 using OrangeFinance.Application.Common.Extensions;
@@ -11,11 +12,12 @@ using OrangeFinance.Application.Security.Dtos;
 
 namespace OrangeFinance.Application.Security;
 
-public sealed class SecurityService(IHttpClientFactory httpClientFactory, IConfiguration section)
+public sealed class SecurityService(IHttpClientFactory httpClientFactory, IConfiguration section, ILogger<SecurityService> logger)
 {
 
     public async Task<ErrorOr<string>> GetApiTokenAsync(LoginDto dto)
     {
+        logger.LogInformation("Getting token for user {Email}", dto.Email);
         return await CreateRemoteTokenAsync(dto);
     }
 
@@ -43,13 +45,16 @@ public sealed class SecurityService(IHttpClientFactory httpClientFactory, IConfi
 
     private async Task<ErrorOr<string>> CreateRemoteTokenAsync(LoginDto dto)
     {
+        logger.LogInformation("Start {@Dto}", dto);
+
         try
         {
-            //Aplicar origin
-
             var client = httpClientFactory.CreateClient("Back-Authentication");
+            logger.LogInformation("Start {@client}", client);
 
-            var response = await client.PostAsync("/api/sessions", dto.ToJsonContent());
+            var content = dto.ToJsonContent();
+
+            var response = await client.PostAsync("/api/sessions", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -59,7 +64,7 @@ public sealed class SecurityService(IHttpClientFactory httpClientFactory, IConfi
         }
         catch (Exception ex)
         {
-            return Error.Failure(code: "User.Never", description: ex.Message);
+            return Error.Failure(code: "User.Token", description: ex.Message);
         }
     }
 }

@@ -11,12 +11,20 @@ using OrangeFinance.Endpoints;
 
 using Scalar.AspNetCore;
 
+using Serilog;
+
 namespace OrangeFinance.Extensions;
 
 public static class Configuration
 {
     public static void RegisterServices(this WebApplicationBuilder builder)
     {
+        builder.Host.UseSerilog((context, services, configuration) =>
+        {
+            configuration.ReadFrom.Configuration(context.Configuration);
+        });
+
+        builder.AddOpenTelemetry(builder.Configuration);
 
         builder.Services.AddApiVersioning(options =>
         {

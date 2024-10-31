@@ -10,8 +10,15 @@ public static class CreateDatabase
     {
         using (var scope = web.Services.CreateScope())
         {
-            using var context = scope.ServiceProvider.GetRequiredService<OrangeFinanceDbContext>();
-            context.Database.EnsureCreated();
+            try
+            {
+                using var context = scope.ServiceProvider.GetRequiredService<OrangeFinanceDbContext>();
+                context.Database.EnsureCreated();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

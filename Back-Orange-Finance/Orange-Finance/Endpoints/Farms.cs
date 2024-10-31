@@ -21,13 +21,15 @@ public static class Farms
 
         farms.MapPost("", async (IMediator mediator, IMapper mapper, [FromBody] CreateFarmRequest request) =>
         {
+            //TODO: Validar envio de imagem da terra, criar fila, workers, adicionar cnpj (object value)
+            //TODO: Adicionar validação de coordenadas. FluentValidation
+
             var command = mapper.Map<CreateFarmCommand>(request);
 
             var result = await mediator.Send(command);
 
-
             return result.Match(value => Results.Created("", value: mapper.Map<FarmResponse>(value)),
-                           errors => errors.GetProblemsDetails());
+                                errors => errors.GetProblemsDetails());
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 201)

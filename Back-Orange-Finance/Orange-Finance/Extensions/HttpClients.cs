@@ -11,7 +11,9 @@ internal static class HttpClients
 
         builder.Services.AddHttpClient("Back-Authentication", client =>
         {
-            client.BaseAddress = new Uri("https://localhost:5001");
+            client.BaseAddress = new Uri("http://127.0.0.1:3000");
+            client.DefaultRequestHeaders.Add("Origin", "Orange-Finance-Api");
+
         }).AddPolicyHandler(request =>
         {
 

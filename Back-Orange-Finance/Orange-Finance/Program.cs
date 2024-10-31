@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using OrangeFinance;
 using OrangeFinance.Application;
 using OrangeFinance.Common.Mapping.MongoDB;
@@ -5,28 +7,66 @@ using OrangeFinance.Extensions;
 using OrangeFinance.Infrastructure;
 using OrangeFinance.Infrastructure.Persistence.Configurations;
 
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
+using Serilog.Context;
 
-builder.Services.AddPresentation();
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+using SerilogTracing;
 
-builder.Services.AddProblemDetails();
+using var _ = new ActivityListenerConfiguration()
+    .Instrument.AspNetCoreRequests(opts =>
+    {
+        opts.IncomingTraceParent = IncomingTraceParent.Trust;
+    })
+    .TraceToSharedLogger();
 
-builder.AddJwtAuthentication();
-builder.AddClientsFactory();
-builder.RegisterServices();
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
 
-MongoDBMappingConfig.RegisterMappings();
+    builder.Services.AddPresentation();
+    builder.Services.AddApplication();
+    builder.Services.AddInfrastructure(builder.Configuration);
 
-/*App*/
+    builder.Services.AddProblemDetails();
 
-var app = builder.Build();
-app.RegisterMiddlewares();
-
-app.EnsureCreatedDatabase();
-app.RegisterGraphQL();
-app.RegisterApiVersion();
+    builder.AddJwtAuthentication();
+    builder.AddClientsFactory();
+    builder.RegisterServices();
 
 
-app.Run();
+
+    Log.Information("Starting up application");
+
+    MongoDBMappingConfig.RegisterMappings();
+
+    /*App*/
+
+    var app = builder.Build();
+    app.RegisterMiddlewares();
+
+    app.EnsureCreatedDatabase();
+    app.RegisterGraphQL();
+    app.RegisterApiVersion();
+    app.UseSerilogRequestLogging();
+    app.Use(async (context, next) =>
+    {
+        LogContext.PushProperty("UserId", context.User?.Identity?.Name ?? "anonymous");
+        var correlationId = Activity.Current?.TraceId.ToString() ?? Guid.NewGuid().ToString();
+        LogContext.PushProperty("CorrelationId", correlationId);
+
+        await next.Invoke();
+    });
+
+    app.Run();
+
+    return 0;
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Unhandled exception");
+    return 1;
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}
