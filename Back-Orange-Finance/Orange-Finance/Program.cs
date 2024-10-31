@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 using OrangeFinance;
 using OrangeFinance.Application;
 using OrangeFinance.Common.Mapping.MongoDB;
@@ -8,7 +6,6 @@ using OrangeFinance.Infrastructure;
 using OrangeFinance.Infrastructure.Persistence.Configurations;
 
 using Serilog;
-using Serilog.Context;
 
 using SerilogTracing;
 
@@ -47,15 +44,7 @@ try
     app.EnsureCreatedDatabase();
     app.RegisterGraphQL();
     app.RegisterApiVersion();
-    app.UseSerilogRequestLogging();
-    app.Use(async (context, next) =>
-    {
-        LogContext.PushProperty("UserId", context.User?.Identity?.Name ?? "anonymous");
-        var correlationId = Activity.Current?.TraceId.ToString() ?? Guid.NewGuid().ToString();
-        LogContext.PushProperty("CorrelationId", correlationId);
-
-        await next.Invoke();
-    });
+    app.RegisterLogConfiguration();
 
     app.Run();
 
