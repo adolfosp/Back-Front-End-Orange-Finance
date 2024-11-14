@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeFinance.Contracts", "
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{308B4C23-D04D-47F7-8201-E4F6CE6791B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker-Orange-Finance", "Worker-Orange-Finance\Worker-Orange-Finance.csproj", "{B8B5FF2F-FC6C-4606-9276-5A0C774BDDBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker-Orange-Finance", "Worker-Orange-Finance\Worker-Orange-Finance.csproj", "{B8B5FF2F-FC6C-4606-9276-5A0C774BDDBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeFinance.Adapters", "OrangeFinance.Adapters\OrangeFinance.Adapters.csproj", "{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{B8B5FF2F-FC6C-4606-9276-5A0C774BDDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8B5FF2F-FC6C-4606-9276-5A0C774BDDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8B5FF2F-FC6C-4606-9276-5A0C774BDDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
