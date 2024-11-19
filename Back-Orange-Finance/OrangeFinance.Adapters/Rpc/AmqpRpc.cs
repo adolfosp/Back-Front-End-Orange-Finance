@@ -11,20 +11,11 @@ using RabbitMQ.Client.Events;
 
 namespace OrangeFinance.Adapters.Rpc;
 
-public class AmqpRpc
+public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource activitySource)
 {
-    private readonly IModel model;
-    private readonly IAmqpSerializer serializer;
-    private readonly ActivitySource activitySource;
-    private readonly TimeSpan defaultTimeout;
-
-    public AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource activitySource, TimeSpan defaultTimeout)
-    {
-        this.model = model;
-        this.serializer = serializer;
-        this.activitySource = activitySource;
-        this.defaultTimeout = defaultTimeout;
-    }
+    private readonly IModel model = model;
+    private readonly IAmqpSerializer serializer = serializer;
+    private readonly ActivitySource activitySource = activitySource;
 
     public void FireAndForget<TRequest>(string exchangeName, string routingKey, TRequest requestModel)
     {

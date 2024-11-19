@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 
 namespace OrangeFinance.Adapters.Serialization;
 
-internal abstract class AmqpBaseSerializer(ActivitySource activitySource, string name) : IAmqpSerializer
+public abstract class AmqpBaseSerializer(ActivitySource activitySource, string name) : IAmqpSerializer
 {
     private readonly ActivitySource _activitySource = activitySource;
     private readonly string _className = name;

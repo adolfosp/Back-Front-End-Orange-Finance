@@ -4,7 +4,7 @@ using RabbitMQ.Client;
 
 namespace OrangeFinance.Adapters;
 
-internal static partial class Extension
+public static partial class Extension
 {
     public static IBasicProperties SetMessageId(this IBasicProperties basicProperties, string messageId = null)
     {

@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrangeFinance.Adapters\OrangeFinance.Adapters.csproj" />
     <ProjectReference Include="..\OrangeFinance.Application\OrangeFinance.Application.csproj" />
   </ItemGroup>
 

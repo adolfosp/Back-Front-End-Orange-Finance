@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+using OrangeFinance.Adapters.Configuration;
 using OrangeFinance.Adapters.Rpc;
 using OrangeFinance.Adapters.Serialization;
 
@@ -9,13 +10,13 @@ using RabbitMQ.Client;
 
 namespace OrangeFinance.Adapters;
 
-internal static partial class Extensions
+public static partial class Extensions
 {
     public static IServiceCollection AddRabbitMQ(this IServiceCollection services, Action<RabbitMQConfigurationBuilder> action)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
-        if (action is null) throw new ArgumentNullException(nameof(action));
-        RabbitMQConfigurationBuilder builder = new RabbitMQConfigurationBuilder(services);
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(action);
+        RabbitMQConfigurationBuilder builder = new(services);
 
         action(builder);
 
@@ -33,9 +34,7 @@ internal static partial class Extensions
         services.AddScoped(sp => new AmqpRpc(
                  sp.GetRequiredService<IModel>(),
                  sp.GetRequiredService<IAmqpSerializer>(),
-                 sp.GetRequiredService<ActivitySource>(),
-                 TimeSpan.FromMinutes(5)
-             )
+                 sp.GetRequiredService<ActivitySource>())
          );
 
         return services;

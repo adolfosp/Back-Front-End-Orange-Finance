@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 
 namespace OrangeFinance.Adapters;
 
-internal static partial class Extension
+public static partial class Extension
 {
     public static Activity SafeStartActivity(this ActivitySource activitySource, [CallerMemberName] string name = "", ActivityKind kind = ActivityKind.Internal)
     {

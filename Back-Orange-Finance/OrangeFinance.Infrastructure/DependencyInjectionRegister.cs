@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using OrangeFinance.Adapters;
+using OrangeFinance.Adapters.Serialization;
 using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
@@ -36,6 +38,7 @@ public static class DependencyInjectionRegister
         services.AddScoped<IReadFarmRepository, FarmRepository>();
         services.AddScoped<IWriteFarmRepository, FarmRepository>();
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
+        services.AddRabbitMQ(cfg => cfg.WithConfiguration(configuration).WithSerializer<SystemTextJsonAmqpSerializer>());
 
         return services;
     }
