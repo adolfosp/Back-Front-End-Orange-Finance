@@ -56,5 +56,3 @@ Esse projeto está sob a licença **APACHE 2**. Para mais informações, consult
 
 - **[Adolfo Poiatti]**
 - **Email**: [adolfo.poiatti@gmail.com](mailto:adolfo.poiatti@gmail.com)
-
----
