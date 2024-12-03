@@ -28,7 +28,7 @@ public static partial class Extensions
 
     public static IServiceCollection AddAmqpRpcClient(this IServiceCollection services)
     {
-        if (services is null) throw new ArgumentNullException(nameof(services));
+        ArgumentNullException.ThrowIfNull(services);
         services.AddTransient(sp => sp.GetRequiredService<IConnection>().CreateModel());
 
         services.AddScoped(sp => new AmqpRpc(

@@ -19,6 +19,7 @@ public sealed class RabbitMQConfigurationBuilder
     private string _configurationPrefix = "RABBITMQ";
     private int _connectMaxAttempts = 8;
     private Func<int, TimeSpan> _produceWaitConnectWait = (retryAttempt) => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt));
+    private List<ExchangeConfiguration> _exchanges = [];
 
     public RabbitMQConfigurationBuilder(IServiceCollection services)
     {
@@ -59,6 +60,13 @@ public sealed class RabbitMQConfigurationBuilder
         return this;
     }
 
+    public RabbitMQConfigurationBuilder WithExchange(ExchangeConfiguration exchangeConfig)
+    {
+        ArgumentNullException.ThrowIfNull(exchangeConfig);
+        _exchanges.Add(exchangeConfig);
+        return this;
+    }
+
     public void Build()
     {
         ArgumentNullException.ThrowIfNull(this._configuration);
@@ -88,17 +96,54 @@ public sealed class RabbitMQConfigurationBuilder
                    IConnection connection = sp.GetRequiredService<ConnectionFactory>().CreateConnection();
 
                    Console.WriteLine(@$"Connected on RabbitMQ '{connection}' with name '{connection.ClientProvidedName}'. 
-....Local Port: {connection.LocalPort}
-....Remote Port: {connection.RemotePort}
-....cluster_name: {connection.ServerProperties.AsString("cluster_name")}
-....copyright: {connection.ServerProperties.AsString("copyright")}
-....information: {connection.ServerProperties.AsString("information")}
-....platform: {connection.ServerProperties.AsString("platform")}
-....product: {connection.ServerProperties.AsString("product")}
-....version: {connection.ServerProperties.AsString("version")}");
+                                    ....Local Port: {connection.LocalPort}
+                                    ....Remote Port: {connection.RemotePort}
+                                    ....cluster_name: {connection.ServerProperties.AsString("cluster_name")}
+                                    ....copyright: {connection.ServerProperties.AsString("copyright")}
+                                    ....information: {connection.ServerProperties.AsString("information")}
+                                    ....platform: {connection.ServerProperties.AsString("platform")}
+                                    ....product: {connection.ServerProperties.AsString("product")}
+                                    ....version: {connection.ServerProperties.AsString("version")}");
+
+
+                   var channel = connection.CreateModel();
+
+                   foreach (var exchangeConfig in _exchanges)
+                   {
+                       channel.ExchangeDeclare(
+                           exchangeConfig.ExchangeName,
+                           exchangeConfig.ExchangeType,
+                           exchangeConfig.Durable,
+                           exchangeConfig.AutoDelete,
+                           exchangeConfig.Arguments
+                       );
+                       Console.WriteLine($"Exchange '{exchangeConfig.ExchangeName}' created with type '{exchangeConfig.ExchangeType}'.");
+
+                       foreach (var queueConfig in exchangeConfig.Queues)
+                           BindQueueToExchange(channel, exchangeConfig, queueConfig);
+
+                   }
 
                    return connection;
                })
        );
+    }
+
+    private static void BindQueueToExchange(IModel channel, ExchangeConfiguration exchangeConfig, QueueConfiguration queueConfig)
+    {
+        channel.QueueDeclare(queue: queueConfig.QueueName,
+                             durable: queueConfig.Durable,
+                             exclusive: false,
+                             autoDelete: queueConfig.AutoDelete,
+                             arguments: queueConfig.Arguments);
+        Console.WriteLine($"Queue '{queueConfig.QueueName}' created.");
+
+        channel.QueueBind(
+            queueConfig.QueueName,
+            exchangeConfig.ExchangeName,
+            queueConfig.QueueName
+        );
+        Console.WriteLine($"Queue '{queueConfig.QueueName}' binded to exchange '{exchangeConfig.ExchangeName}'.");
+
     }
 }

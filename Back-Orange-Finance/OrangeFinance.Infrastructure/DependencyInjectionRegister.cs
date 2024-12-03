@@ -38,7 +38,9 @@ public static class DependencyInjectionRegister
         services.AddScoped<IReadFarmRepository, FarmRepository>();
         services.AddScoped<IWriteFarmRepository, FarmRepository>();
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
-        services.AddRabbitMQ(cfg => cfg.WithConfiguration(configuration).WithSerializer<SystemTextJsonAmqpSerializer>());
+        services.AddRabbitMQ(cfg => cfg.WithConfiguration(configuration)
+                                       .WithSerializer<SystemTextJsonAmqpSerializer>()
+                                       );
 
         return services;
     }

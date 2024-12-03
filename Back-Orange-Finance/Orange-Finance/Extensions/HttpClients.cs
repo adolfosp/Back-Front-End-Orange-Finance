@@ -7,7 +7,7 @@ internal static class HttpClients
     public static void AddClientsFactory(this WebApplicationBuilder builder)
     {
         const int retryCount = 3;
-        HttpMethod[] idempotentMethod = [HttpMethod.Get, HttpMethod.Put, HttpMethod.Delete];
+        HttpMethod[] idempotentMethod = { HttpMethod.Get, HttpMethod.Put, HttpMethod.Delete };
 
         builder.Services.AddHttpClient("Back-Authentication", client =>
         {
