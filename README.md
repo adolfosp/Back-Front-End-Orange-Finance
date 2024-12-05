@@ -83,7 +83,7 @@ Esse projeto está sob a licença **APACHE 2**. Para mais informações, consult
 
 ## 📬 Contact
 
-- **[Adolfo Poiatti]**
+- **Linkedin**: [adolfosp](https://www.linkedin.com/in/adolfosp/)
 - **Email**: [adolfo.poiatti@gmail.com](mailto:adolfo.poiatti@gmail.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
