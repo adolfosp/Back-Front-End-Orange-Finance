@@ -29,7 +29,7 @@
   </ol>
 </details>
 
-## 📋 About the project
+## About the project
 
 This API was developed as an environment to simulate scenarios in the context of agriculture, providing a foundation to experiment with, test, and implement different design patterns, technologies, and architectural approaches.
 
@@ -37,7 +37,7 @@ The primary goal is to serve as a project for enhancing software development ski
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Patterns and Technologies 
+## Patterns and Technologies 
 ### Technologies
 
 - **[.NET 8]** 
@@ -51,7 +51,7 @@ The primary goal is to serve as a project for enhancing software development ski
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📁 Folder structure
+## Folder structure
 
 ### Web API
 ```bash
@@ -75,13 +75,13 @@ The primary goal is to serve as a project for enhancing software development ski
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📝 License
+## License
 
 This project is under the **APACHE 2** license. For more information, see [LICENSE](/LICENSE).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📬 Contact
+## Contact
 
 - **Linkedin**: [adolfosp](https://www.linkedin.com/in/adolfosp/)
 - **Email**: [adolfo.poiatti@gmail.com](mailto:adolfo.poiatti@gmail.com)
