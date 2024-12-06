@@ -40,11 +40,11 @@ The primary goal is to serve as a project for enhancing software development ski
 ## 🚀 Patterns and Technologies 
 ### Technologies
 
-- **[.NET 8]** - Ambiente de execução JavaScript para o backend
-- **[Docker]** - Containerização da aplicação
-- **[Redis]** - Banco de dados para persistência de informações
-- **[ScalarUI]** - Documentação da API
-- **[JWT]** - Autenticação baseada em tokens
+- **[.NET 8]** 
+- **[Docker]** 
+- **[Redis]**
+- **[ScalarUI]**
+- **[JWT]**
 
 ### Patterns
 - **[CQRS]**
@@ -77,7 +77,7 @@ The primary goal is to serve as a project for enhancing software development ski
 
 ## 📝 License
 
-Esse projeto está sob a licença **APACHE 2**. Para mais informações, consulte o arquivo [LICENSE](/LICENSE).
+This project is under the **APACHE 2** license. For more information, see [LICENSE](/LICENSE).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
