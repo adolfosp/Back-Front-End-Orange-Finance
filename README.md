@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/adolfosp/Back-Front-End-Orange-Finance">
-    <img src="https://github.com/user-attachments/assets/dd83a32a-d67d-4471-bba4-b85e3794af05" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/b87ab837-de13-47ef-88a1-a2ac5bf056ea" alt="Logo" width="120" height="120">
   </a>
 
   <h3 align="center">Back Front End Orange Finance</h3>
