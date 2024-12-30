@@ -60,6 +60,6 @@ jobs:
 
       # Opcional: Varredura de vulnerabilidades na imagem Docker
       - name: Scan Docker image for vulnerabilities
-        uses: aquasecurity/trivy-action@v0.29.0
+        uses: aquasecurity/trivy-action@0.29.0
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
