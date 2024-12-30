@@ -22,7 +22,7 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         this.Send(exchangeName, routingKey, requestModel, null);
     }
 
-    protected virtual void Send<TRequest>(string exchangeName, string routingKey, TRequest requestModel, string callbackQueueName = null)
+    public void Send<TRequest>(string exchangeName, string routingKey, TRequest requestModel, string callbackQueueName = null)
     {
         using Activity currentActivity = this.activitySource.SafeStartActivity("AmqpRpc.Send", ActivityKind.Client);
         currentActivity.AddTag("Exchange", exchangeName);

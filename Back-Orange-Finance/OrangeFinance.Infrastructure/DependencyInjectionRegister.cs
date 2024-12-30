@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using OrangeFinance.Adapters;
+using OrangeFinance.Adapters.Configuration;
 using OrangeFinance.Adapters.Serialization;
 using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
@@ -38,9 +39,31 @@ public static class DependencyInjectionRegister
         services.AddScoped<IReadFarmRepository, FarmRepository>();
         services.AddScoped<IWriteFarmRepository, FarmRepository>();
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
-        services.AddRabbitMQ(cfg => cfg.WithConfiguration(configuration)
-                                       .WithSerializer<SystemTextJsonAmqpSerializer>()
-                                       );
+        var exchangeConfig = new ExchangeConfiguration
+        {
+            ExchangeName = "user_service",
+            ExchangeType = "direct",
+            Durable = true,
+            AutoDelete = false,
+            Arguments = [],
+            Queues =
+    [
+        new() {
+            QueueName = "add_user",
+            Durable = true,
+            AutoDelete = false,
+            Arguments = []
+        }
+    ]
+        };
+
+        #region RabbitMQ
+        services.AddRabbitMQ(cfg => cfg.WithExchange(exchangeConfig).WithConfiguration(configuration)
+                                       .WithSerializer<SystemTextJsonAmqpSerializer>());
+
+        services.AddAmqpRpcClient();
+        #endregion
+
 
         return services;
     }

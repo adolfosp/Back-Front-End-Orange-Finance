@@ -71,9 +71,6 @@ public sealed class RabbitMQConfigurationBuilder
     {
         ArgumentNullException.ThrowIfNull(this._configuration);
 
-        this._services.AddTransient(sp => sp.GetRequiredService<IConnection>().CreateModel());
-
-
         this._services.AddSingleton(sp =>
         {
             ConnectionFactory factory = new();
@@ -93,7 +90,9 @@ public sealed class RabbitMQConfigurationBuilder
                {
                    System.Diagnostics.Debug.WriteLine("Trying to create a connection with RabbitMQ");
 
-                   IConnection connection = sp.GetRequiredService<ConnectionFactory>().CreateConnection();
+                   var connectionFactory = sp.GetRequiredService<ConnectionFactory>();
+
+                   IConnection connection = connectionFactory.CreateConnection();
 
                    Console.WriteLine(@$"Connected on RabbitMQ '{connection}' with name '{connection.ClientProvidedName}'. 
                                     ....Local Port: {connection.LocalPort}
@@ -136,12 +135,13 @@ public sealed class RabbitMQConfigurationBuilder
                              exclusive: false,
                              autoDelete: queueConfig.AutoDelete,
                              arguments: queueConfig.Arguments);
+
         Console.WriteLine($"Queue '{queueConfig.QueueName}' created.");
 
         channel.QueueBind(
-            queueConfig.QueueName,
-            exchangeConfig.ExchangeName,
-            queueConfig.QueueName
+            queue: queueConfig.QueueName,
+            exchange: exchangeConfig.ExchangeName,
+            routingKey: string.Empty
         );
         Console.WriteLine($"Queue '{queueConfig.QueueName}' binded to exchange '{exchangeConfig.ExchangeName}'.");
 

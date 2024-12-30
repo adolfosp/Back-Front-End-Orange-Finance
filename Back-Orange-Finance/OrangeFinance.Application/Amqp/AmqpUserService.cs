@@ -15,8 +15,8 @@ public sealed class AmqpUserService : AmqpServiceBase
 
     protected override string ServiceName => "UserService";
 
-    public void SendUser<TRequest>(string exchangeName, string routingKey, TRequest requestModel)
+    public void SendUser<TRequest>(TRequest requestModel, string routeName = "add_user")
     {
-        _amqpRpc.FireAndForget(exchangeName, routingKey, requestModel);
+        _amqpRpc.Send(ExchangeName, routeName, requestModel);
     }
 }

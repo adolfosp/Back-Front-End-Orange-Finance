@@ -5,6 +5,7 @@ services:
     depends_on:
       - sqlserver
       - cache
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -67,10 +68,26 @@ services:
       - seq-data:/data
       - seq-logs:/logs
 
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: "rabbitmq"
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - app_network
 volumes:
   seq-data:
   seq-logs:
   cache:
+    driver: local
+  rabbitmq_data:
     driver: local
 
 networks:

@@ -6,6 +6,7 @@ using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using OrangeFinance.Application.Amqp;
 using OrangeFinance.Application.Common.Behaviors;
 using OrangeFinance.Application.Security;
 
@@ -24,6 +25,7 @@ public static class DependencyInjectionRegister
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddScoped<SecurityService>();
+        services.AddScoped<AmqpUserService>();
 
         return services;
     }
