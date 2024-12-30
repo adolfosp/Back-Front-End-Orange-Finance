@@ -1,30 +1,59 @@
-# Back Front End Orange Finance
+<a id="readme-top"></a>
+<br />
+<div align="center">
+  <a href="https://github.com/adolfosp/Back-Front-End-Orange-Finance">
+    <img src="https://github.com/user-attachments/assets/b87ab837-de13-47ef-88a1-a2ac5bf056ea" alt="Logo" width="120" height="120">
+  </a>
 
-## 📋 Description
+  <h3 align="center">Back Front End Orange Finance</h3>
+
+  <p align="center">
+    This API simulates agricultural scenarios to experiment with design patterns, technologies, and software development practices.
+    <br />
+    <a href="https://github.com/adolfosp/Back-Front-End-Orange-Finance"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li><a href="#patterns-and-technologies">Patterns and Technologies</a></li>
+    <li><a href="#folder-structure">Folder structure</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+## About the project
 
 This API was developed as an environment to simulate scenarios in the context of agriculture, providing a foundation to experiment with, test, and implement different design patterns, technologies, and architectural approaches.
 
 The primary goal is to serve as a project for enhancing software development skills, enabling tests of all kinds: from unit, integration, and performance testing to experimenting with design patterns and new technologies.
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Patterns and Technologies used 
+## Patterns and Technologies 
 ### Technologies
 
-- **[.NET 8]** - Ambiente de execução JavaScript para o backend
-- **[Docker]** - Containerização da aplicação
-- **[Redis]** - Banco de dados para persistência de informações
-- **[ScalarUI]** - Documentação da API
-- **[JWT]** - Autenticação baseada em tokens
+- **[.NET 8]** 
+- **[Docker]** 
+- **[Redis]**
+- **[ScalarUI]**
+- **[JWT]**
 
 ### Patterns
 - **[CQRS]**
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📁 Estrutura de Pastas
+## Folder structure
 
-## Web API
+### Web API
 ```bash
 📦Orange-Finance
  ┣ 📂Common
@@ -44,15 +73,18 @@ The primary goal is to serve as a project for enhancing software development ski
 
 ```
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📝 Licença
+## License
 
-Esse projeto está sob a licença **APACHE 2**. Para mais informações, consulte o arquivo [LICENSE](/LICENSE).
+This project is under the **APACHE 2** license. For more information, see [LICENSE](/LICENSE).
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📬 Contato
+## Contact
 
-- **[Adolfo Poiatti]**
+- **Linkedin**: [adolfosp](https://www.linkedin.com/in/adolfosp/)
 - **Email**: [adolfo.poiatti@gmail.com](mailto:adolfo.poiatti@gmail.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
