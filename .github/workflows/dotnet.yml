@@ -54,7 +54,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: Back-Orange-Finance/Orange-Finance
+          context: Back-Orange-Finance
           file: Back-Orange-Finance/Orange-Finance/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
