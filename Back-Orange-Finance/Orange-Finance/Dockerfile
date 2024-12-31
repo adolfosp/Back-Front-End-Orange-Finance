@@ -9,15 +9,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Orange-Finance/Orange-Finance.csproj", "Orange-Finance/"]
-RUN dotnet restore "./Orange-Finance/Orange-Finance.csproj"
+COPY ["Orange-Finance/OrangeFinance.csproj", "Orange-Finance/"]
+RUN dotnet restore "./Orange-Finance/OrangeFinance.csproj"
 COPY . .
 WORKDIR "/src/Orange-Finance"
-RUN dotnet build "./Orange-Finance.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./OrangeFinance.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Orange-Finance.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./OrangeFinance.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
