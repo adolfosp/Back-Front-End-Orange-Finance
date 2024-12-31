@@ -8,57 +8,58 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     environment:
       name: actions_back_front_orange_finance
+    
     steps:
-      # Checkout do código
+      # 1. Checkout do código
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      # Semantic Release
+      # 2. Semantic Release (opcional, caso utilize)
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      # Configurar .NET
+      # 3. Configurar .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.x
 
-      # Restaurar dependências
+      # 4. Restaurar dependências
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore Back-Orange-Finance/Orange-Finance/OrangeFinance.csproj
 
-      # Construir aplicação
+      # 5. Construir aplicação
       - name: Build application
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build Back-Orange-Finance/Orange-Finance/OrangeFinance.csproj --no-restore --configuration Release
 
-      # Publicar aplicação
+      # 6. Publicar aplicação
       - name: Publish application
-        run: dotnet publish --no-build --configuration Release -o out
+        run: dotnet publish Back-Orange-Finance/Orange-Finance/OrangeFinance.csproj --no-build --configuration Release -o out
 
-      # Fazer login no DockerHub
+      # 7. Fazer login no DockerHub
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Construir e enviar a imagem Docker
+      # 8. Construir e enviar a imagem Docker
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
+          # Ajuste o 'context' caso o Dockerfile esteja em outro caminho
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
 
-      # Opcional: Varredura de vulnerabilidades na imagem Docker
+      # 9. Varredura de vulnerabilidades na imagem Docker (opcional)
       - name: Scan Docker image for vulnerabilities
         uses: aquasecurity/trivy-action@0.29.0
         with:
