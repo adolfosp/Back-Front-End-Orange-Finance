@@ -39,26 +39,11 @@ public static class DependencyInjectionRegister
         services.AddScoped<IReadFarmRepository, FarmRepository>();
         services.AddScoped<IWriteFarmRepository, FarmRepository>();
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
-        var exchangeConfig = new ExchangeConfiguration
-        {
-            ExchangeName = "user_service",
-            ExchangeType = "direct",
-            Durable = true,
-            AutoDelete = false,
-            Arguments = [],
-            Queues =
-    [
-        new() {
-            QueueName = "add_user",
-            Durable = true,
-            AutoDelete = false,
-            Arguments = []
-        }
-    ]
-        };
+
+
 
         #region RabbitMQ
-        services.AddRabbitMQ(cfg => cfg.WithExchange(exchangeConfig).WithConfiguration(configuration)
+        services.AddRabbitMQ(cfg => cfg.WithExchange(ExchangeQueueConfigurationFactory.CreateFarmExchangeConfiguration()).WithConfiguration(configuration)
                                        .WithSerializer<SystemTextJsonAmqpSerializer>());
 
         services.AddAmqpRpcClient();
