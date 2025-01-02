@@ -14,7 +14,6 @@ public class FarmInputType : InputObjectGraphType<CreateFarmRequest>
         Field(x => x.Latitude).Description("Latitude da fazenda");
         Field(x => x.Size).Description("Tamanho da fazenda");
         Field(x => x.Type).Description("Tipo da fazenda");
-        Field(x => x.Image).Description("Imagem da fazenda");
 
     }
 }

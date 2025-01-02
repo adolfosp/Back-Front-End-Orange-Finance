@@ -38,7 +38,7 @@ public static class Configuration
             app.MapScalarApiReference(options =>
             {
                 options
-                    .WithTitle("My custom API")
+                    .WithTitle("Orange Finance API")
                     .WithTheme(ScalarTheme.Alternate)
                     .WithSidebar(true)
                     .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)

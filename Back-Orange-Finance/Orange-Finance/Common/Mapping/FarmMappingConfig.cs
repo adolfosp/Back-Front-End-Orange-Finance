@@ -20,7 +20,6 @@ public class FarmMappingConfig : IRegister
             .Map(dest => dest.Location, src => new Coordinate(src.Latitude, src.Longitude))
             .Map(dest => dest.Size, src => src.Size)
             .Map(dest => dest.Type, src => src.Type)
-            .Map(dest => dest.Image, src => src.Image)
             .Map(dest => dest.Cnpj, src => new Cnpj(src.Cnpj));
 
         config.NewConfig<Farm, FarmModel>()

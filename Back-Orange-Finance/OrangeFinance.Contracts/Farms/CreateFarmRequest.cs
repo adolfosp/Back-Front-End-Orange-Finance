@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace OrangeFinance.Contracts.Farms;
+﻿namespace OrangeFinance.Contracts.Farms;
 
 public record CreateFarmRequest(string Name,
                                 string Description,
@@ -8,6 +6,5 @@ public record CreateFarmRequest(string Name,
                                 double Latitude,
                                 string Size,
                                 string Type,
-                                IFormFile Image,
                                 string Cnpj);
 

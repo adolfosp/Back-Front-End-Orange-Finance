@@ -25,7 +25,7 @@ public static class DependencyInjectionRegister
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddScoped<SecurityService>();
-        services.AddScoped<AmqpUserService>();
+        services.AddScoped<AmqpFarmService>();
 
         return services;
     }

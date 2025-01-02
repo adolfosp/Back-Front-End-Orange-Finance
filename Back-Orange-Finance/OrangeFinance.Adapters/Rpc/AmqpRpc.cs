@@ -29,6 +29,8 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         currentActivity.AddTag("RoutingKey", routingKey);
         currentActivity.AddTag("CallbackQueue", callbackQueueName);
 
+        this.model.ConfirmSelect();
+
         IBasicProperties requestProperties = this.model.CreateBasicProperties()
                                                 .SetTelemetry(currentActivity)
                                                 .SetMessageId()
@@ -37,9 +39,36 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         currentActivity.AddTag("MessageId", requestProperties.MessageId);
         currentActivity.AddTag("CorrelationId", requestProperties.CorrelationId);
 
+        // Registrar eventos de confirmação e não confirmação
+        HandleBasicAckNack();
+
         this.model.BasicPublish(exchangeName, routingKey, requestProperties, this.serializer.Serialize(requestProperties, requestModel));
 
+        HandleDelayConfirmation();
+
         currentActivity.SetEndTime(DateTime.UtcNow);
+    }
+
+    private void HandleBasicAckNack()
+    {
+        this.model.BasicAcks += (sender, ea) =>
+        {
+            Console.WriteLine($"Mensagem com tag {ea.DeliveryTag} confirmada pelo RabbitMQ.");
+        };
+
+        this.model.BasicNacks += (sender, ea) =>
+        {
+            Console.WriteLine($"Mensagem com tag {ea.DeliveryTag} não confirmada pelo RabbitMQ.");
+        };
+
+    }
+
+    private void HandleDelayConfirmation()
+    {
+        if (!this.model.WaitForConfirms(TimeSpan.FromSeconds(5)))
+            Console.WriteLine("Nenhuma confirmação recebida dentro do tempo limite.");
+        else
+            Console.WriteLine("Todas as mensagens foram confirmadas.");
     }
 
     protected virtual TResponse Receive<TResponse>(QueueDeclareOk queue, TimeSpan receiveTimeout)

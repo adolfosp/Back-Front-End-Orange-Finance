@@ -4,6 +4,7 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using OrangeFinance.Application.Amqp;
 using OrangeFinance.Application.Farms.Commands.CreateFarm;
 using OrangeFinance.Application.Farms.Queries.Farms;
 using OrangeFinance.Contracts.Farms;
@@ -19,17 +20,23 @@ public static class Farms
 
         var farms = routes.MapGroup("/farms");
 
-        farms.MapPost("", async (IMediator mediator, IMapper mapper, [FromBody] CreateFarmRequest request) =>
+        farms.MapPost("", async (IMediator mediator, IMapper mapper, AmqpFarmService aqmpFarm, [FromBody] CreateFarmRequest request) =>
         {
-            //TODO: Validar envio de imagem da terra, criar fila, workers, adicionar cnpj (object value)
+
+            //WIP: Validar envio de imagem da terra, criar fila, workers, adicionar cnpj (object value)
             //TODO: Adicionar validação de coordenadas. FluentValidation
 
             var command = mapper.Map<CreateFarmCommand>(request);
 
             var result = await mediator.Send(command);
 
-            return result.Match(value => Results.Created("", value: mapper.Map<FarmResponse>(value)),
-                                errors => errors.GetProblemsDetails());
+
+            return result.Match(value =>
+            {
+                aqmpFarm.SendLocationFarm(new { value.Location.Latitude, value.Location.Longitude });
+                return Results.Created("", value: mapper.Map<FarmResponse>(value));
+            },
+            errors => errors.GetProblemsDetails());
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 201)

@@ -31,7 +31,6 @@ public sealed class CreateFarmCommandHandler : IRequestHandler<CreateFarmCommand
                                     latitude: request.Location.Latitude,
                                     size: request.Size,
                                     type: request.Type,
-                                    image: request.Image,
                                     cnpj: request.Cnpj);
 
         FarmModel? farmModel = _mapper.Map<FarmModel>(farm);

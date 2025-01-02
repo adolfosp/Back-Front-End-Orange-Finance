@@ -11,7 +11,6 @@ public sealed class CreateFarmCommandValidator : AbstractValidator<CreateFarmCom
         RuleFor(x => x.Location).NotNull();
         RuleFor(x => x.Size).NotEmpty();
         RuleFor(x => x.Type).NotEmpty();
-        RuleFor(x => x.Image).NotEmpty();
 
     }
 }

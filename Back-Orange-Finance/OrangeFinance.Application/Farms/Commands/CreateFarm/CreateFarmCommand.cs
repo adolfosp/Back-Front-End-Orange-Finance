@@ -8,4 +8,4 @@ using OrangeFinance.Domain.Farms.ValueObjects;
 
 namespace OrangeFinance.Application.Farms.Commands.CreateFarm;
 
-public record CreateFarmCommand(string Name, string Description, Coordinate Location, string Size, string Type, string Image, Cnpj Cnpj) : IRequest<ErrorOr<Farm>>;
+public record CreateFarmCommand(string Name, string Description, Coordinate Location, string Size, string Type, Cnpj Cnpj) : IRequest<ErrorOr<Farm>>;

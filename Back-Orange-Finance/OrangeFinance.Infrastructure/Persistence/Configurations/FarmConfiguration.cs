@@ -42,6 +42,7 @@ public sealed class FarmConfiguration : IEntityTypeConfiguration<FarmModel>
          .Property(m => m.Type);
 
         builder
-         .Property(m => m.Image);
+         .Property(m => m.Image)
+         .IsRequired(false);
     }
 }
