@@ -80,18 +80,20 @@ public static class Configuration
     public static void RegisterGraphQL(this WebApplication app)
     {
         app.UseGraphQL<ISchema>();
-        app.UseGraphQLPlayground("/",
-                         new PlaygroundOptions
-                         {
-                             PlaygroundSettings = new Dictionary<string, object>
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseGraphQLPlayground("/",
+                             new PlaygroundOptions
                              {
-                                 ["editor.theme"] = "light",
-                                 ["editor.cursorShape"] = "line",
-                             },
-                             GraphQLEndPoint = "/graphql",
-                             SubscriptionsEndPoint = "/graphql",
-                         });
-
+                                 PlaygroundSettings = new Dictionary<string, object>
+                                 {
+                                     ["editor.theme"] = "light",
+                                     ["editor.cursorShape"] = "line",
+                                 },
+                                 GraphQLEndPoint = "/graphql",
+                                 SubscriptionsEndPoint = "/graphql",
+                             });
+        }
     }
 
     public static void RegisterApiVersion(this WebApplication app)
