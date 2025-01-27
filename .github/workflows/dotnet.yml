@@ -57,10 +57,10 @@ jobs:
           context: Back-Orange-Finance
           file: Back-Orange-Finance/Orange-Finance/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:{{env.NEXT_RELEASE_VERSION}}
 
       # 9. Varredura de vulnerabilidades na imagem Docker (opcional)
       - name: Scan Docker image for vulnerabilities
         uses: aquasecurity/trivy-action@0.29.0
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:{{env.NEXT_RELEASE_VERSION}}
