@@ -27,7 +27,7 @@ jobs:
       - name: Extract and format release version
         run: |
           echo "Extracting version from Semantic Release output"
-          RELEASE_VERSION="${{ steps.semantic_release.outputs.version }}"
+          RELEASE_VERSION="${{ steps.semantic_release.outputs.nextRelease.version }}"
           CLEANED_VERSION="${RELEASE_VERSION#v}"
           echo "NEXT_VERSION=$CLEANED_VERSION" >> $GITHUB_ENV
           echo "Formatted version CLEANED_VERSION: $CLEANED_VERSION"
