@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.10...v1.0.11) (2025-01-27)
+
+
+### Bug Fixes
+
+* add only http ([5e5e0f3](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/5e5e0f3d369d3f29bbfa9f97e71728b7e6a98097))
+
 ## [1.0.10](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.9...v1.0.10) (2025-01-27)
 
 
