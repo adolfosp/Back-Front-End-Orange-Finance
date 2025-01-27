@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.12...v1.0.13) (2025-01-27)
+
+
+### Bug Fixes
+
+* remove port dockerfile ([543a487](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/543a4874aba65a86a95af55c73453ef1be5e6e86))
+
 ## [1.0.12](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.11...v1.0.12) (2025-01-27)
 
 
