@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.13...v1.0.14) (2025-01-27)
+
+
+### Bug Fixes
+
+* remove definition of port on dockefile ([5596c72](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/5596c729de036574be5e385ea2e35c31899fd1d2))
+
 ## [1.0.13](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.12...v1.0.13) (2025-01-27)
 
 
