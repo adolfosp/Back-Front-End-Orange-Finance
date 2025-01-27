@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.1...v1.0.2) (2025-01-27)
+
+
+### Bug Fixes
+
+* change file docker-compose ([6e643db](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/6e643db9cb658f1520cd77cdce3dd11f5dfb7abc))
+
 ## [1.0.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.0...v1.0.1) (2025-01-02)
 
 
