@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.0...v1.0.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* treat code to accept null image ([ee573c8](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/ee573c8a3936522b3389b616da5e615a82695b21))
+
 # 1.0.0 (2024-12-05)
 
 
