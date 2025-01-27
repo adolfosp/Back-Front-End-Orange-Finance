@@ -13,12 +13,6 @@
       }
     ],
     [
-      "@semantic-release/exec",
-      {
-        "successCmd": "echo v${nextRelease.version} > version"
-      }
-    ],
-    [
       "@semantic-release/git",
       {
         "assets": [
@@ -26,6 +20,12 @@
         ]
       }
     ],
-    "@semantic-release/github"
+    "@semantic-release/github",
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "echo v${nextRelease.version} > version"
+      }
+    ]
   ]
 }
