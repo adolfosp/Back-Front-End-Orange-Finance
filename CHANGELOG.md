@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.4...v1.0.5) (2025-01-27)
+
+
+### Bug Fixes
+
+* Update dotnet.yml ([5b76142](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/5b7614230760697896017bd2a3f08e150e0f9101))
+
 ## [1.0.4](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.3...v1.0.4) (2025-01-27)
 
 
