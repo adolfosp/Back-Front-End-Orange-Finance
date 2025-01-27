@@ -30,7 +30,7 @@ jobs:
           RELEASE_VERSION="${{ steps.semantic_release.outputs.newReleaseVersion }}"
           CLEANED_VERSION="${RELEASE_VERSION#v}"
           echo "NEXT_VERSION=$CLEANED_VERSION" >> $GITHUB_ENV
-          echo env.NEXT_VERSION
+          echo "Formatted version (NEXT_VERSION): $CLEANED_VERSION"
 
 
       - name: Setup .NET
