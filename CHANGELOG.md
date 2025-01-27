@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.7...v1.0.8) (2025-01-27)
+
+
+### Bug Fixes
+
+* add correct env to number image ([c3d3452](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/c3d34527d5f456a71bb5f948b49f556dc03ef927))
+
 ## [1.0.7](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.6...v1.0.7) (2025-01-27)
 
 
