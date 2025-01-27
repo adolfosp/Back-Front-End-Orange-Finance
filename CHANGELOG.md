@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.11...v1.0.12) (2025-01-27)
+
+
+### Bug Fixes
+
+* add correct port ([5d78a1c](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/5d78a1c0705320ae85dd36ad230899914a0c0fef))
+
 ## [1.0.11](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.10...v1.0.11) (2025-01-27)
 
 
