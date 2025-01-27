@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.9...v1.0.10) (2025-01-27)
+
+
+### Bug Fixes
+
+* disable https by env ([984aafb](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/984aafbdd2f362fa8e803f7197567ac9286ee43c))
+
 ## [1.0.9](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.8...v1.0.9) (2025-01-27)
 
 
