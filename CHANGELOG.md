@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.8...v1.0.9) (2025-01-27)
+
+
+### Bug Fixes
+
+* change name of dll on dockerfile ([028351a](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/028351a4025102c4c86aa6b8760d22a000b6d183))
+
 ## [1.0.8](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.7...v1.0.8) (2025-01-27)
 
 
