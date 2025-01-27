@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.5...v1.0.6) (2025-01-27)
+
+
+### Bug Fixes
+
+* Update pipe ([e6c72ca](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/e6c72ca2d839a48523edda488c7eb6dbea74f254))
+* Update pipe ([7b77caa](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/7b77caa083568378e175b19515ced7a619e87b6f))
+* Update release ([584311b](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/584311bae13eb72f09ea2479cffe3d3aa81fb5ec))
+
 ## [1.0.5](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.4...v1.0.5) (2025-01-27)
 
 
