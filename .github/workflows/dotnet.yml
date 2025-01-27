@@ -24,14 +24,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Extract and format release version
+      - name: Get latest tag as build name
+        id: get_version_number
         run: |
-          echo "Extracting version from Semantic Release output"
-          RELEASE_VERSION="${{ steps.semantic_release.outputs.nextRelease.version }}"
-          CLEANED_VERSION="${RELEASE_VERSION#v}"
-          echo "NEXT_VERSION=$CLEANED_VERSION" >> $GITHUB_ENV
-          echo "Formatted version CLEANED_VERSION: $CLEANED_VERSION"
-          echo "Formatted version RELEASE_VERSION: $RELEASE_VERSION"
+          git_tag=$(git describe --abbrev=0 --tags)
+          git_tag_sub=${git_tag:1}
+          echo "Build number: $git_tag_sub"
+          echo "version_number=$git_tag_sub" >> $GITHUB_ENV
+
+      - name: Echo the version number
+        run: |
+          echo "The version number is: ${{ env.version_number }}"
 
 
       - name: Setup .NET
