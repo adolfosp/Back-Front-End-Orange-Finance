@@ -25,7 +25,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Extract and format release version
-        run: echo "NEXT_VERSION=${{ steps.semantic_release.outputs.newReleaseVersion#v }}" | sed 's/^v//' >> $GITHUB_ENV
+        run: |
+          echo "Extracting version from Semantic Release output"
+          RELEASE_VERSION="${{ steps.semantic_release.outputs.newReleaseVersion }}"
+          CLEANED_VERSION="${RELEASE_VERSION#v}"
+          echo "NEXT_VERSION=$CLEANED_VERSION" >> $GITHUB_ENV
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
