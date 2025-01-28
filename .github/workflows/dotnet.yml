@@ -64,7 +64,9 @@ jobs:
           context: Back-Orange-Finance
           file: Back-Orange-Finance/Orange-Finance/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ env.version_number }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ env.version_number }}
+            ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
 
       - name: Scan Docker image for vulnerabilities
         if: ${{ env.version_number != '' }}
