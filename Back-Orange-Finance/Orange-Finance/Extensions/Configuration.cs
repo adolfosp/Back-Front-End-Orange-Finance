@@ -109,6 +109,7 @@ public static class Configuration
 
         routeGroupBuilder.RegisterFarmEndpoints();
         routeGroupBuilder.RegisterSecurityEndpoints();
+        routeGroupBuilder.RegisterInfoEndpoints();
 
     }
 }
