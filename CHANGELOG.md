@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.15...v1.1.0) (2025-01-30)
+
+
+### Features
+
+* add route to give information about machine ([49e9950](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/49e995043ef2b80e4718d4c69a26653af631d906))
+
 ## [1.0.15](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.14...v1.0.15) (2025-01-28)
 
 
