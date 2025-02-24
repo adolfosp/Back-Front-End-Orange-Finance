@@ -86,11 +86,11 @@ jobs:
             file: Back-Orange-Finance/Orange-Finance/Dockerfile
             push: true
             tags: |
-              ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
-              ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
+              ${{ secrets.DOCKERHUB_USERNAME }}/orange-finance-backend:latest
 
         - name: Scan Docker image for vulnerabilities
           if: ${{ needs.build.outputs.version_number != '' }}
           uses: aquasecurity/trivy-action@0.29.0
           with:
-            image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
+            image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
