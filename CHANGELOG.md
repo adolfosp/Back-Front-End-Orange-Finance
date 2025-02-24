@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.1...v1.3.2) (2025-02-24)
+
+
+### Bug Fixes
+
+* change url cache ([f68c570](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/f68c57009e965b39e9e8e85db8267b4de5b0b852))
+
 ## [1.3.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.0...v1.3.1) (2025-02-24)
 
 
