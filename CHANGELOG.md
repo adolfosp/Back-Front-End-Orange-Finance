@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.2.0...v1.3.0) (2025-02-24)
+
+
+### Features
+
+* update appsettings ([079f3ad](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/079f3ad7ebec4f2265926b470cf977808c507845))
+
 # [1.2.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.1.0...v1.2.0) (2025-02-24)
 
 
