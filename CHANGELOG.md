@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.4...v1.3.5) (2025-02-24)
+
+
+### Bug Fixes
+
+* change host sql server ([b5e5192](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/b5e5192aab541f73cca79a3d2a26b64b4e9e2a71))
+
 ## [1.3.4](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.3...v1.3.4) (2025-02-24)
 
 
