@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version_number: ${{ steps.get_version_number.outputs.version_number }}
+
     environment:
       name: actions_back_front_orange_finance
     
@@ -31,6 +34,8 @@ jobs:
           git_tag_sub=${git_tag:1}
           echo "Build number: $git_tag_sub"
           echo "version_number=$git_tag_sub" >> $GITHUB_ENV
+          echo "::set-output name=version_number::$git_tag_sub"
+
 
       - name: Echo the version number
         run: |
@@ -62,28 +67,28 @@ jobs:
         
         - name: Echo the version number
           run: |
-               echo "The version number is: ${{ env.version_number }}"
+               echo "The version number is: ${{ needs.build.outputs.version_number }}"
 
         - name: Log in to DockerHub
-          if: ${{ env.version_number != '' }}
+          if: ${{ needs.build.outputs.version_number != '' }}
           uses: docker/login-action@v2
           with:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
 
         - name: Build and push Docker image
-          if: ${{ env.version_number != '' }}
+          if: ${{ needs.build.outputs.version_number != '' }}
           uses: docker/build-push-action@v4
           with:
             context: Back-Orange-Finance
             file: Back-Orange-Finance/Orange-Finance/Dockerfile
             push: true
             tags: |
-              ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ env.version_number }}
+              ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
               ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:latest
 
         - name: Scan Docker image for vulnerabilities
-          if: ${{ env.version_number != '' }}
+          if: ${{ needs.build.outputs.version_number != '' }}
           uses: aquasecurity/trivy-action@0.29.0
           with:
-            image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ env.version_number }}
+            image-ref: ${{ secrets.DOCKER_USERNAME }}/orange-finance-backend:${{ needs.build.outputs.version_number }}
