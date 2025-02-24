@@ -1,3 +1,10 @@
+## [1.3.11](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.10...v1.3.11) (2025-02-24)
+
+
+### Bug Fixes
+
+* change to postgres ([c236261](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/c2362615d279e5ee89e606103a6eae22c7029752))
+
 ## [1.3.10](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.9...v1.3.10) (2025-02-24)
 
 
