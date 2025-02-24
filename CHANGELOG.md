@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.1.0...v1.2.0) (2025-02-24)
+
+
+### Features
+
+* update Redis and SQL Server connections ([f4c5df9](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/f4c5df9fcdb0f2f005de177e227dff0c61683ed6))
+
 # [1.1.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.0.15...v1.1.0) (2025-01-30)
 
 
