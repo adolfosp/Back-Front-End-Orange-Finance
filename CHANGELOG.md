@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.2...v1.3.3) (2025-02-24)
+
+
+### Bug Fixes
+
+* add correct name in hosts ([3326f3a](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/3326f3a936671333fdedc9e291b7f373140840e7))
+
 ## [1.3.2](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.1...v1.3.2) (2025-02-24)
 
 
