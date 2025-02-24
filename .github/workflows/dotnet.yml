@@ -68,7 +68,7 @@ jobs:
         - name: Echo the version number
           run: |
                echo "The version number is: ${{ needs.build.outputs.version_number }}"
-               echo ${{ secrets.DOCKERHUB_USERNAME }}
+               echo "Username: ${{ secrets.DOCKERHUB_USERNAME }}"
                echo ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Log in to DockerHub
