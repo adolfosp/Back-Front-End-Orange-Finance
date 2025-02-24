@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.0...v1.3.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* add correct variable on workflow ([7e020ec](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/7e020ec3b95e42f62c8ec444c2ef5958a4e2dc50))
+
 # [1.3.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.2.0...v1.3.0) (2025-02-24)
 
 
