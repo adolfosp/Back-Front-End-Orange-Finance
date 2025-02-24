@@ -63,7 +63,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
           with:
-            persist-credentials: false
+            persist-credentials: true
         
         - name: Echo the version number
           run: |
