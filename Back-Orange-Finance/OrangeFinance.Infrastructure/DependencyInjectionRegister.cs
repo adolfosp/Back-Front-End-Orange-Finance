@@ -29,7 +29,7 @@ public static class DependencyInjectionRegister
         configuration.Bind(SqlServerSettings.SectionName, sqlServerSettings);
 
         services.AddDbContext<OrangeFinanceDbContext>(options =>
-            options.UseSqlServer(sqlServerSettings.ConnectionString));
+            options.UseNpgsql(sqlServerSettings.ConnectionString));
 
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
         services.AddSingleton(new RedisDBContext(redisSettings.ConnectionString));
