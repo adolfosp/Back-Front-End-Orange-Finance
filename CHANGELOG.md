@@ -1,3 +1,10 @@
+## [1.3.14](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.13...v1.3.14) (2025-02-25)
+
+
+### Bug Fixes
+
+* change host cache ([0145391](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/0145391edbf874376080b32769ec1faeeeaaf337))
+
 ## [1.3.13](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.12...v1.3.13) (2025-02-24)
 
 
