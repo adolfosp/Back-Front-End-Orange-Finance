@@ -1,7 +1,8 @@
 ﻿namespace OrangeFinance.Infrastructure.Persistence.Models;
 
-internal class SqlServerSettings
+internal class PostgresSettings
+
 {
-    public static string SectionName { get => "SqlServerSettings"; }
+    public static string SectionName { get => "PostgresSettings"; }
     public string ConnectionString { get; set; }
 }

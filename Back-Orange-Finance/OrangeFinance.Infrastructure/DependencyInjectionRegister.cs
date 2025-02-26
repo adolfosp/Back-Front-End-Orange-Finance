@@ -25,8 +25,8 @@ public static class DependencyInjectionRegister
         var redisSettings = new RedisSettings();
         configuration.Bind(RedisSettings.SectionName, redisSettings);
 
-        var sqlServerSettings = new SqlServerSettings();
-        configuration.Bind(SqlServerSettings.SectionName, sqlServerSettings);
+        var sqlServerSettings = new PostgresSettings();
+        configuration.Bind(PostgresSettings.SectionName, sqlServerSettings);
 
         services.AddDbContext<OrangeFinanceDbContext>(options =>
             options.UseNpgsql(sqlServerSettings.ConnectionString));

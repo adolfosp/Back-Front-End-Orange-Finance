@@ -30,8 +30,6 @@ try
     builder.AddClientsFactory();
     builder.RegisterServices();
 
-
-
     Log.Information("Starting up application");
 
     MongoDBMappingConfig.RegisterMappings();

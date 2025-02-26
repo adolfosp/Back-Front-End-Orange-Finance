@@ -20,7 +20,7 @@ public sealed class OrangeFinanceDbContext : DbContext
         _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
     }
 
-    public DbSet<FarmModel> Farms { get; set; } = null!;
+    public DbSet<FarmModel> Farms { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
