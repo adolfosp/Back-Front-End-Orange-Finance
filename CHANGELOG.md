@@ -1,3 +1,10 @@
+## [1.3.17](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.16...v1.3.17) (2025-02-26)
+
+
+### Bug Fixes
+
+* change port of postgres ([6b45e8f](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/6b45e8fa87405562ae69503fb9e127863957b71b))
+
 ## [1.3.16](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.15...v1.3.16) (2025-02-26)
 
 
