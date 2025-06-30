@@ -2,10 +2,12 @@ version: '3.8'
 
 services:
   orangefinance:
+    container_name: "api"
     depends_on:
       - postgres
       - cache
       - rabbitmq
+      - seq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -21,9 +23,10 @@ services:
 
   postgres:
     image: postgres:latest
+    container_name: "postgres"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "SqlServer2022!"
+      POSTGRES_PASSWORD: "postgresPassword"
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
@@ -43,6 +46,7 @@ services:
 
   cache:
     image: redis:latest
+    container_name: "cache"
     restart: always
     ports:
       - "6379:6379"
@@ -62,11 +66,14 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SEQ_FIRSTRUN_ADMINUSERNAME=admin
-      - SEQ_FIRSTRUN_ADMINPASSWORD=senha_segura
+      - SEQ_FIRSTRUN_ADMINPASSWORD=adolfo123
       - SEQ_ENABLEAUTHENTICATION=true
     volumes:
       - seq-data:/data
       - seq-logs:/logs
+    networks:
+      - app_network
+
 
   rabbitmq:
     image: "rabbitmq:management"

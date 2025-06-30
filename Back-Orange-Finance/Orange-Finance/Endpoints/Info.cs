@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Serilog;
+using System.Net;
 using System.Net.NetworkInformation;
 
 namespace OrangeFinance.Endpoints;
@@ -8,6 +9,12 @@ public static class Info
     public static void RegisterInfoEndpoints(this IEndpointRouteBuilder routes)
     {
         var farms = routes.MapGroup("/info");
+
+        farms.MapPost("/log-seq", (ILogger<string> logger) =>
+        {
+            Log.Error("Testando Api Seq");
+
+        });
 
         farms.MapGet("", async () =>
         {
@@ -56,4 +63,5 @@ public static class Info
 
 
     }
+
 }

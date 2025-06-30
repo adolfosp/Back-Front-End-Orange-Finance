@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
-
-using OrangeFinance.Application.Common.Interfaces;
+﻿using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Infrastructure.Persistence;
+using System.Text.Json;
 
-namespace OrangeFinance.Infrastructure
+namespace OrangeFinance.Infrastructure.Repositories
 {
     internal sealed class CacheRepository : ICacheRepository
     {

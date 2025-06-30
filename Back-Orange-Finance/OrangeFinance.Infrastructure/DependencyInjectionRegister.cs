@@ -25,11 +25,11 @@ public static class DependencyInjectionRegister
         var redisSettings = new RedisSettings();
         configuration.Bind(RedisSettings.SectionName, redisSettings);
 
-        var sqlServerSettings = new PostgresSettings();
-        configuration.Bind(PostgresSettings.SectionName, sqlServerSettings);
+        var postgresSettings = new PostgresSettings();
+        configuration.Bind(PostgresSettings.SectionName, postgresSettings);
 
         services.AddDbContext<OrangeFinanceDbContext>(options =>
-            options.UseNpgsql(sqlServerSettings.ConnectionString));
+            options.UseNpgsql(postgresSettings.ConnectionString));
 
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
         services.AddSingleton(new RedisDBContext(redisSettings.ConnectionString));
