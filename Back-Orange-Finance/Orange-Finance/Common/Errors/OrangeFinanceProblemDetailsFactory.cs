@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
-
 using OrangeFinance.Http;
 
-namespace OrangeFinance.Common.Erros;
+namespace OrangeFinance.Common.Errors;
 
 public class OrangeFinanceProblemDetailsFactory : ProblemDetailsFactory
 {

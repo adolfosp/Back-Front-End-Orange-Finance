@@ -2,6 +2,9 @@
 
 namespace OrangeFinance.Domain.Farms.ValueObjects;
 
+/// <summary>
+/// Usar GUID como Id prejudica a performance no banco de dados na parte de indexação
+/// </summary>
 public sealed class FarmId : AggregateRootId<Guid>
 {
     public FarmId(Guid value)

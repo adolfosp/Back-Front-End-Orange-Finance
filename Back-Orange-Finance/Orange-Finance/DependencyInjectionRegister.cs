@@ -3,8 +3,7 @@ using GraphQL.MicrosoftDI;
 using GraphQL.Types;
 
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-
-using OrangeFinance.Common.Erros;
+using OrangeFinance.Common.Errors;
 using OrangeFinance.Common.Mapping;
 using OrangeFinance.GraphQL.Farms.Mutations;
 using OrangeFinance.GraphQL.Farms.Queries;
