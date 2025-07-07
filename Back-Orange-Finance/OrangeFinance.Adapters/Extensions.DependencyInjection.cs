@@ -1,12 +1,9 @@
-﻿using System.Diagnostics;
-
-using Microsoft.Extensions.DependencyInjection;
-
+﻿using Microsoft.Extensions.DependencyInjection;
 using OrangeFinance.Adapters.Configuration;
 using OrangeFinance.Adapters.Rpc;
 using OrangeFinance.Adapters.Serialization;
-
 using RabbitMQ.Client;
+using System.Diagnostics;
 
 namespace OrangeFinance.Adapters;
 

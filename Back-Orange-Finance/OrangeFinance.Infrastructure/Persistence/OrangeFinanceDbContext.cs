@@ -10,17 +10,19 @@ namespace OrangeFinance.Infrastructure.Persistence;
 
 public sealed class OrangeFinanceDbContext : DbContext
 {
-    private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor;
+    private readonly PublishDomainEventsInterceptor? _publishDomainEventsInterceptor;
 
     public OrangeFinanceDbContext(
         DbContextOptions<OrangeFinanceDbContext> options,
-        PublishDomainEventsInterceptor publishDomainEventsInterceptor
+        PublishDomainEventsInterceptor? publishDomainEventsInterceptor
     ) : base(options)
     {
         _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
     }
 
     public DbSet<FarmModel> Farms { get; set; }
+
+    public DbSet<HarvestModel> Harvests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

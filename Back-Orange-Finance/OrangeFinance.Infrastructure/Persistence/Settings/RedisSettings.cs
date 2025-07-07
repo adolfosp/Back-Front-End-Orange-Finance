@@ -1,4 +1,4 @@
-﻿namespace OrangeFinance.Infrastructure.Persistence.Models;
+﻿namespace OrangeFinance.Infrastructure.Persistence.Settings;
 
 internal class RedisSettings
 {

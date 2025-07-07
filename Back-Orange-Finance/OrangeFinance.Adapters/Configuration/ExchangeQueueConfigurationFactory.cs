@@ -14,7 +14,7 @@ public static class ExchangeQueueConfigurationFactory
             Arguments = [],
             Queues = [
                 new() {
-                        QueueName = "add_photo_location",
+                        QueueName = "location_farm",
                         Durable = true,
                         AutoDelete = false,
                         Arguments = []

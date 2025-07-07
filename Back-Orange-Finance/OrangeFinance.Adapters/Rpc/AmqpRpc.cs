@@ -1,12 +1,9 @@
-﻿using System.Collections.Concurrent;
-using System.Diagnostics;
-
-using Humanizer;
-
+﻿using Humanizer;
 using OrangeFinance.Adapters.Serialization;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Collections.Concurrent;
+using System.Diagnostics;
 
 
 namespace OrangeFinance.Adapters.Rpc;
@@ -29,6 +26,7 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         currentActivity.AddTag("RoutingKey", routingKey);
         currentActivity.AddTag("CallbackQueue", callbackQueueName);
 
+        // Isso ativa o modo de confirmação para garantir que a mensagem foi confirmada pelo RabbitMQ.
         this.model.ConfirmSelect();
 
         IBasicProperties requestProperties = this.model.CreateBasicProperties()
@@ -71,7 +69,7 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
             Console.WriteLine("Todas as mensagens foram confirmadas.");
     }
 
-    protected virtual TResponse Receive<TResponse>(QueueDeclareOk queue, TimeSpan receiveTimeout)
+    public TResponse Receive<TResponse>(string queueName, TimeSpan receiveTimeout)
     {
         using BlockingCollection<AmqpResponse<TResponse>> localQueue = [];
 
@@ -82,7 +80,7 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         {
             using Activity receiveActivity = this.activitySource.SafeStartActivity("AmqpRpc.Receive", ActivityKind.Server);
             receiveActivity.SetParentId(receivedItem.BasicProperties.GetTraceId(), receivedItem.BasicProperties.GetSpanId(), ActivityTraceFlags.Recorded);
-            receiveActivity.AddTag("Queue", queue.QueueName);
+            receiveActivity.AddTag("Queue", queueName);
             receiveActivity.AddTag("MessageId", receivedItem.BasicProperties.MessageId);
             receiveActivity.AddTag("CorrelationId", receivedItem.BasicProperties.CorrelationId);
 
@@ -111,13 +109,13 @@ public class AmqpRpc(IModel model, IAmqpSerializer serializer, ActivitySource ac
         };
 
         // Second Task
-        string consumerTag = this.model.BasicConsume(queue: queue.QueueName, autoAck: true, consumer: consumer);
+        string consumerTag = this.model.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
         AmqpResponse<TResponse> responseModel;
         try
         {
             if (!localQueue.TryTake(out responseModel, receiveTimeout))
             {
-                throw new TimeoutException($"The operation has timed-out after {receiveTimeout.Humanize()} waiting a RPC response at {queue.QueueName} queue.");
+                throw new TimeoutException($"The operation has timed-out after {receiveTimeout.Humanize()} waiting a RPC response at {queueName} queue.");
             }
         }
         finally

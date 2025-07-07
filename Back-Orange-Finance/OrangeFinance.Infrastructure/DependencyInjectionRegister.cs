@@ -10,7 +10,7 @@ using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Infrastructure.Persistence;
 using OrangeFinance.Infrastructure.Persistence.Interceptors;
-using OrangeFinance.Infrastructure.Persistence.Models;
+using OrangeFinance.Infrastructure.Persistence.Settings;
 using OrangeFinance.Infrastructure.Repositories;
 
 namespace OrangeFinance.Infrastructure;

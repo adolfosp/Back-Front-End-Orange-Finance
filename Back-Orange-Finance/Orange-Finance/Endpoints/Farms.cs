@@ -36,8 +36,6 @@ public static class Farms
 
             var result = await mediator.Send(command);
 
-
-
             return result.Match(value =>
             {
                 aqmpFarm.SendLocationFarm(new { value.Location.Latitude, value.Location.Longitude });
