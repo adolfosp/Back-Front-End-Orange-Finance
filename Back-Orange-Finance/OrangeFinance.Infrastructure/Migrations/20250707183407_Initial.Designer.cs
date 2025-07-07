@@ -12,8 +12,8 @@ using OrangeFinance.Infrastructure.Persistence;
 namespace OrangeFinance.Infrastructure.Migrations
 {
     [DbContext(typeof(OrangeFinanceDbContext))]
-    [Migration("20250707175402_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250707183407_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,9 +83,6 @@ namespace OrangeFinance.Infrastructure.Migrations
                     b.Property<Guid>("FarmId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("FarmId1")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("HarvestDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -96,22 +93,16 @@ namespace OrangeFinance.Infrastructure.Migrations
 
                     b.HasIndex("FarmId");
 
-                    b.HasIndex("FarmId1");
-
                     b.ToTable("Harvests", (string)null);
                 });
 
             modelBuilder.Entity("OrangeFinance.Domain.Farms.Models.HarvestModel", b =>
                 {
-                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", null)
+                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", "Farm")
                         .WithMany("Harvests")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", "Farm")
-                        .WithMany()
-                        .HasForeignKey("FarmId1");
 
                     b.Navigation("Farm");
                 });

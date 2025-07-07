@@ -80,9 +80,6 @@ namespace OrangeFinance.Infrastructure.Migrations
                     b.Property<Guid>("FarmId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("FarmId1")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("HarvestDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -93,22 +90,16 @@ namespace OrangeFinance.Infrastructure.Migrations
 
                     b.HasIndex("FarmId");
 
-                    b.HasIndex("FarmId1");
-
                     b.ToTable("Harvests", (string)null);
                 });
 
             modelBuilder.Entity("OrangeFinance.Domain.Farms.Models.HarvestModel", b =>
                 {
-                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", null)
+                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", "Farm")
                         .WithMany("Harvests")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("OrangeFinance.Domain.Farms.Models.FarmModel", "Farm")
-                        .WithMany()
-                        .HasForeignKey("FarmId1");
 
                     b.Navigation("Farm");
                 });

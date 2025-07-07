@@ -6,7 +6,8 @@ using OrangeFinance.Infrastructure.Persistence.Settings;
 namespace OrangeFinance.Infrastructure.Persistence.Factories;
 
 /// <summary>
-/// Classe criada pelo motivo de que o EFCore não consgue resolver as dependências extras do DbContext em tempo de design. Quando rodamos a migration, o EFCore lê esse contexto
+/// Classe criada pelo motivo de que o EFCore não consgue resolver as dependências extras do DbContext em tempo de design.
+/// Quando rodamos a migration, o EFCore lê esse contexto
 /// </summary>
 public class DesignTimeOrangeFinanceDbContextFactory : IDesignTimeDbContextFactory<OrangeFinanceDbContext>
 {

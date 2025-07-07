@@ -34,9 +34,9 @@ public sealed class HarvestConfiguration : IEntityTypeConfiguration<HarvestModel
         builder.Property(h => h.FarmId)
             .IsRequired();
 
-        // Uma farm pode ter várias colheitas, mas uma colheita pertence a uma única farm
-        builder.HasOne<FarmModel>()
-               .WithMany(f => f.Harvests)
-               .HasForeignKey(h => h.FarmId);
+        builder.HasOne(h => h.Farm)
+                .WithMany(f => f.Harvests)
+                .HasForeignKey(h => h.FarmId);
+
     }
 }
