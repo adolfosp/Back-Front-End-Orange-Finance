@@ -15,9 +15,11 @@ using OrangeFinance.Extensions;
 namespace OrangeFinance.Endpoints;
 
 /// <summary>
-/// Abordagem usada para registrar os endpoints relacionados às fazendas.
-/// MediaTR é usado para manipular comandos e consultas, enquanto MapsterMapper é usado para mapear entre DTOs e modelos de domínio.
-/// Minimal APIs são usadas para definir os endpoints.
+/// 1- Abordagem usada para registrar os endpoints relacionados às fazendas.
+/// 2- MediaTR é usado para manipular comandos e consultas, enquanto MapsterMapper é usado para mapear entre DTOs e modelos de domínio.
+/// 3- Minimal APIs são usadas para definir os endpoints.
+/// 4- Usando retornos pelo pacote ErrorOr
+/// 5- Validações do command é feito por uma classe chamada ValidationBehavior
 /// </summary>
 public static class Farms
 {
