@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 using OrangeFinance.Domain.Common.Models;
 using OrangeFinance.Domain.Farms.Models;
+using OrangeFinance.Domain.Harvests.Models;
 using OrangeFinance.Infrastructure.Persistence.Interceptors;
 
 namespace OrangeFinance.Infrastructure.Persistence;

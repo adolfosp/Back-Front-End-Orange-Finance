@@ -1,7 +1,9 @@
 ﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OrangeFinance.Application.Harvests;
 using OrangeFinance.Contracts.Harvests;
+using OrangeFinance.Domain.Harvests;
 using OrangeFinance.Extensions;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,13 +21,17 @@ public static class Harvests
     {
         var farms = routes.MapGroup("/harvests");
 
-        farms.MapPost("", async (IMediator mediator, IMapper mapper, ILogger<string> logger, [FromBody] HarvestsDto request) =>
+        farms.MapPost("", async (IMediator mediator, IMapper mapper, ILogger<string> logger, HarvestsAppService service, [FromBody] HarvestsDto request) =>
         {
             var validationResults = new List<ValidationResult>();
             var isValid = Validator.TryValidateObject(request, new ValidationContext(request), validationResults, true);
 
             if (!isValid)
                 return validationResults.GetProblemsDetails();
+
+            var harvestModel = mapper.Map<Harvest>(request);
+
+            await service.CreateHarvestAsync(harvestModel);
 
             return Results.Created();
 

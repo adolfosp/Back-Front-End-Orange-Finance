@@ -1,6 +1,7 @@
 ﻿using OrangeFinance.Domain.Farms.Enums;
+using OrangeFinance.Domain.Farms.Models;
 
-namespace OrangeFinance.Domain.Farms.Models;
+namespace OrangeFinance.Domain.Harvests.Models;
 
 public record class HarvestModel
 {
@@ -12,5 +13,5 @@ public record class HarvestModel
 
     // Relacionamento com Farm
     public Guid FarmId { get; init; }
-    public FarmModel? Farm { get; init; }  // Propriedade de navegação
+    public FarmModel? Farm { get; set; }  // Propriedade de navegação
 }

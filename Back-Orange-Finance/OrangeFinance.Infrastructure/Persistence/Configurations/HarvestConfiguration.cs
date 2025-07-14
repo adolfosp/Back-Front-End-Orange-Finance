@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using OrangeFinance.Domain.Farms.Models;
+using OrangeFinance.Domain.Harvests.Models;
 
 namespace OrangeFinance.Infrastructure.Persistence.Configurations;
 

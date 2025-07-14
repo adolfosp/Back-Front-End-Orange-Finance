@@ -10,6 +10,9 @@ using OrangeFinance.Domain.Farms.Models;
 
 namespace OrangeFinance.Application.Farms.Commands.CreateFarm;
 
+/// <summary>
+/// Separado por escrita e leitura e isso feito pela forma das interfaces do repository
+/// </summary>
 public sealed class CreateFarmCommandHandler : IRequestHandler<CreateFarmCommand, ErrorOr<Farm>>
 {
     private readonly IWriteFarmRepository _writeFarmRepository;

@@ -1,4 +1,6 @@
-﻿namespace OrangeFinance.Domain.Farms.Models;
+﻿using OrangeFinance.Domain.Harvests.Models;
+
+namespace OrangeFinance.Domain.Farms.Models;
 
 public record class FarmModel
 {
