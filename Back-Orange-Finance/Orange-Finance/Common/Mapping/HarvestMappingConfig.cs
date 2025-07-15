@@ -14,14 +14,22 @@ public class HarvestMappingConfig : IRegister
 
 
         config.NewConfig<Harvest, HarvestModel>()
-            .ConstructUsing(src => new HarvestModel()
-            {
-                Description = src.Description,
-                HarvestDate = src.HarvestDate,
-                Quantity = src.Quantity,
-                CropType = src.CropType,
-                FarmId = src.FarmId,
-            })
-            .Ignore(dest => dest.Farm);
+            .ConstructUsing(src => new HarvestModel(
+              src.Id,
+              src.Description,
+              src.HarvestDate,
+              src.Quantity,
+              src.CropType,
+              src.FarmId
+            )).Ignore(src => src.Farm);
+
+        config.NewConfig<HarvestModel, HarvestResponse>()
+            .ConstructUsing(src => new HarvestResponse(
+                src.Id,
+                src.FarmId,
+                src.Description,
+                src.HarvestDate,
+                src.Quantity,
+                (int)src.CropType));
     }
 }

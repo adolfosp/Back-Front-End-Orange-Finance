@@ -14,4 +14,14 @@ public record class HarvestModel
     // Relacionamento com Farm
     public Guid FarmId { get; init; }
     public FarmModel? Farm { get; set; }  // Propriedade de navegação
+
+    public HarvestModel(Guid id, string description, DateTime harvestDate, double quantity, CropType cropType, Guid farmId)
+    {
+        Id = id;
+        Description = description;
+        HarvestDate = DateTime.SpecifyKind(harvestDate.ToUniversalTime(), DateTimeKind.Utc);
+        Quantity = quantity;
+        CropType = cropType;
+        FarmId = farmId;
+    }
 }

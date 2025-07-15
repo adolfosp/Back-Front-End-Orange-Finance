@@ -23,15 +23,18 @@ public class FarmMappingConfig : IRegister
             .Map(dest => dest.Cnpj, src => new Cnpj(src.Cnpj));
 
         config.NewConfig<Farm, FarmModel>()
-             .ConstructUsing(src => new FarmModel(src.Id.Value,
-                                                      src.Name,
-                                                      src.Description,
-                                                      src.Location.Longitude,
-                                                      src.Location.Latitude,
-                                                      src.Size,
-                                                      src.Type,
-                                                      src.Image,
-                                                      src.Cnpj.Value));
+            .MapWith(src => new FarmModel(
+                src.Id.Value,
+                src.Name,
+                src.Description,
+                src.Location.Longitude,
+                src.Location.Latitude,
+                src.Size,
+                src.Type,
+                src.Image,
+                src.Cnpj.Value))
+            .Ignore(src => src.Harvests);
+
 
         config.NewConfig<Farm, FarmResponse>()
             .ConstructUsing(src => new FarmResponse(src.Id.Value,

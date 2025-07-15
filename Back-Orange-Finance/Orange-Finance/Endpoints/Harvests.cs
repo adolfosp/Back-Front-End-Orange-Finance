@@ -31,9 +31,14 @@ public static class Harvests
 
             var harvestModel = mapper.Map<Harvest>(request);
 
-            await service.CreateHarvestAsync(harvestModel);
+            var result = await service.CreateHarvestAsync(harvestModel);
 
-            return Results.Created();
+            return result.Match(value =>
+            {
+                logger.LogInformation("Harvest created for Farm ID: {FarmId}", harvestModel.FarmId);
+                return Results.Created("", value: mapper.Map<HarvestResponse>(value));
+            },
+           errors => errors.GetProblemsDetails());
 
         }).Produces(statusCode: 400)
           .Produces(statusCode: 201)
