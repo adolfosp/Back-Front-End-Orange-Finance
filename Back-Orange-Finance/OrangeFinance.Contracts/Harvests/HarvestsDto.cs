@@ -19,4 +19,7 @@ public record HarvestsDto
 
     [Required(ErrorMessage = "FarmId is required.")]
     public required Guid FarmId { get; init; }
+
+    [Required(ErrorMessage = "TypeUnit is required.")]
+    public required int TypeUnit { get; init; }
 }

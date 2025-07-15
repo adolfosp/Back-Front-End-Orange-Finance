@@ -10,7 +10,7 @@ public class HarvestMappingConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<HarvestsDto, Harvest>()
-            .ConstructUsing(src => Harvest.Create(src.Description, src.HarvestDate, src.Quantity, src.CropType, src.FarmId));
+            .ConstructUsing(src => Harvest.Create(src.Description, src.HarvestDate, src.Quantity, src.CropType, src.FarmId, src.TypeUnit));
 
 
         config.NewConfig<Harvest, HarvestModel>()
@@ -20,7 +20,8 @@ public class HarvestMappingConfig : IRegister
               src.HarvestDate,
               src.Quantity,
               src.CropType,
-              src.FarmId
+              src.FarmId,
+              src.TypeUnit
             )).Ignore(src => src.Farm);
 
         config.NewConfig<HarvestModel, HarvestResponse>()

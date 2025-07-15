@@ -32,6 +32,8 @@ services:
       - "5432:5432"
     networks:
       - app_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   jaeger:
     image: jaegertracing/opentelemetry-all-in-one
@@ -96,6 +98,7 @@ volumes:
     driver: local
   rabbitmq_data:
     driver: local
+  pgdata:
 
 networks:
   app_network:
