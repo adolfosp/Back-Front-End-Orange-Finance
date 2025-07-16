@@ -20,7 +20,7 @@ public sealed class Harvest : AggregateRoot<HarvestId, Guid>
     }
 
     public Guid Id { get; init; }
-    public string Description { get; init; };
+    public string Description { get; init; }
     public DateTime HarvestDate { get; init; }
     public double Quantity { get; init; }
     public CropType CropType { get; init; }

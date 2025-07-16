@@ -1,15 +1,16 @@
 
 
 using Microsoft.EntityFrameworkCore;
-
+using OrangeFinance.Application.Common.Interfaces.Persistence;
 using OrangeFinance.Domain.Common.Models;
 using OrangeFinance.Domain.Farms.Models;
+using OrangeFinance.Domain.Finances.Models;
 using OrangeFinance.Domain.Harvests.Models;
 using OrangeFinance.Infrastructure.Persistence.Interceptors;
 
 namespace OrangeFinance.Infrastructure.Persistence;
 
-public sealed class OrangeFinanceDbContext : DbContext
+public sealed class OrangeFinanceDbContext : DbContext, IUnitOfWork
 {
     private readonly PublishDomainEventsInterceptor? _publishDomainEventsInterceptor;
 
@@ -24,6 +25,9 @@ public sealed class OrangeFinanceDbContext : DbContext
     public DbSet<FarmModel> Farms { get; set; }
 
     public DbSet<HarvestModel> Harvests { get; set; }
+
+    public DbSet<FinanceModel> Finances { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

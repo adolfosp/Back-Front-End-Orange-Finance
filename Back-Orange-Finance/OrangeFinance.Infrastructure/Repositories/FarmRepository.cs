@@ -19,8 +19,7 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
 
     public async Task AddAsync(FarmModel farm, CancellationToken cancellationToken)
     {
-        _dbContext.Add(farm);
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await _dbContext.AddAsync(farm);
     }
 
     public async Task DeleteAsync(Guid farmId, CancellationToken cancellationToken)
@@ -36,11 +35,5 @@ internal sealed class FarmRepository : IReadFarmRepository, IWriteFarmRepository
     public async Task<FarmModel?> GetByIdAsync(Guid id)
     {
         return await _dbContext.Farms.FirstOrDefaultAsync(x => x.Id == id);
-    }
-
-    public async Task<bool> UpdateAsync(Guid farmId, FarmModel farm, CancellationToken cancellationToken)
-    {
-        _dbContext.Entry(await _dbContext.Farms.FirstAsync(x => x.Id == farmId)).CurrentValues.SetValues(farm);
-        return (await _dbContext.SaveChangesAsync(cancellationToken)) > 0;
     }
 }

@@ -8,5 +8,4 @@ public sealed class Finance
     public double Money { get; init; }
     public int Quantity { get; init; }
     public TypeTransaction TypeTransaction { get; init; }
-
 }

@@ -6,6 +6,7 @@ using OrangeFinance.Adapters;
 using OrangeFinance.Adapters.Configuration;
 using OrangeFinance.Adapters.Serialization;
 using OrangeFinance.Application.Common.Interfaces;
+using OrangeFinance.Application.Common.Interfaces.Persistence;
 using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Harvests;
@@ -43,6 +44,7 @@ public static class DependencyInjectionRegister
 
         services.AddScoped<IWriteHarvestRepository, HarvestRepository>();
 
+        services.AddScoped<IUnitOfWork>(c => c.GetRequiredService<OrangeFinanceDbContext>());
 
         #region RabbitMQ
         services.AddRabbitMQ(cfg => cfg.WithExchange(ExchangeQueueConfigurationFactory.CreateFarmExchangeConfiguration()).WithConfiguration(configuration)

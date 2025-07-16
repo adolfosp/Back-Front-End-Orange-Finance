@@ -1,10 +1,11 @@
 ﻿using OrangeFinance.Domain.Farms.Enums;
 using OrangeFinance.Domain.Farms.Models;
+using OrangeFinance.Domain.Finances.Models;
 using OrangeFinance.Domain.Harvests.Enums;
 
 namespace OrangeFinance.Domain.Harvests.Models;
 
-public record class HarvestModel
+public sealed record class HarvestModel
 {
     public Guid Id { get; init; }
     public string Description { get; init; }
@@ -13,9 +14,13 @@ public record class HarvestModel
     public CropType CropType { get; init; }
     public TypeUnit TypeUnit { get; init; }
 
-    // Relacionamento com Farm
+    // Relacionamento com a Fazenda
     public Guid FarmId { get; init; }
     public FarmModel? Farm { get; set; }  // Propriedade de navegação
+
+    // Relacionamento com FinanceModel
+    public ICollection<FinanceModel>? Finances { get; set; }  // Coleção de transações financeiras associadas à colheita
+
 
     public HarvestModel(Guid id, string description, DateTime harvestDate, double quantity, CropType cropType, Guid farmId, TypeUnit typeUnit)
     {

@@ -2,7 +2,7 @@
 
 namespace OrangeFinance.Domain.Farms.Models;
 
-public record class FarmModel
+public sealed record class FarmModel
 {
     public FarmModel(Guid id, string name, string description, double longitude, double latitude, string size, string type, string? image, string cnpj)
     {
