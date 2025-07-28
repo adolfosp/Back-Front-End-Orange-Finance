@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.17...v1.4.0) (2025-07-28)
+
+
+### Features
+
+* implement IUnitOfWork on harvest and finance ([ad83f3c](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/ad83f3c533454a04ad30a666280c3ce754831fde))
+
 ## [1.3.17](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.16...v1.3.17) (2025-02-26)
 
 
