@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OrangeFinance.Infrastructure.Persistence;
@@ -11,9 +12,11 @@ using OrangeFinance.Infrastructure.Persistence;
 namespace OrangeFinance.Infrastructure.Migrations
 {
     [DbContext(typeof(OrangeFinanceDbContext))]
-    partial class OrangeFinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250728174058_AddNewFieldOnFinance")]
+    partial class AddNewFieldOnFinance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

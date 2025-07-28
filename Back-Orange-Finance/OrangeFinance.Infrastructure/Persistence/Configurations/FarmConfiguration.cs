@@ -5,7 +5,7 @@ using OrangeFinance.Domain.Farms.Models;
 
 namespace OrangeFinance.Infrastructure.Persistence.Configurations;
 
-public sealed class FarmConfiguration : IEntityTypeConfiguration<FarmModel>
+internal sealed class FarmConfiguration : IEntityTypeConfiguration<FarmModel>
 {
     public void Configure(EntityTypeBuilder<FarmModel> builder)
     {

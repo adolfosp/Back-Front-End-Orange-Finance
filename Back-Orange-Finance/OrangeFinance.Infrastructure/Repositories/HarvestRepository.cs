@@ -8,9 +8,8 @@ internal sealed class HarvestRepository(OrangeFinanceDbContext dbContext) : IWri
 {
     private readonly OrangeFinanceDbContext _dbContext = dbContext;
 
-    public Task AddAsync(HarvestModel harvest, CancellationToken cancellationToken)
+    public async Task AddAsync(HarvestModel harvest, CancellationToken cancellationToken)
     {
-        _dbContext.Add(harvest);
-        return _dbContext.SaveChangesAsync(cancellationToken);
+        await _dbContext.AddAsync(harvest, cancellationToken);
     }
 }

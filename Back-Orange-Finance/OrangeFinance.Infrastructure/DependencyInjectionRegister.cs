@@ -9,6 +9,7 @@ using OrangeFinance.Application.Common.Interfaces;
 using OrangeFinance.Application.Common.Interfaces.Persistence;
 using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Farms;
+using OrangeFinance.Application.Common.Interfaces.Persistence.Finances;
 using OrangeFinance.Application.Common.Interfaces.Persistence.Harvests;
 using OrangeFinance.Infrastructure.Persistence;
 using OrangeFinance.Infrastructure.Persistence.Interceptors;
@@ -43,6 +44,7 @@ public static class DependencyInjectionRegister
         services.AddScoped<IWriteDomainEventsRepository, DomainEventsRepository>();
 
         services.AddScoped<IWriteHarvestRepository, HarvestRepository>();
+        services.AddScoped<IWriteFinanceRepository, FinanceRepository>();
 
         services.AddScoped<IUnitOfWork>(c => c.GetRequiredService<OrangeFinanceDbContext>());
 

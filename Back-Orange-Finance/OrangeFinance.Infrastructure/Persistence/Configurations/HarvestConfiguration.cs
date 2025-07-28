@@ -4,7 +4,7 @@ using OrangeFinance.Domain.Harvests.Models;
 
 namespace OrangeFinance.Infrastructure.Persistence.Configurations;
 
-public sealed class HarvestConfiguration : IEntityTypeConfiguration<HarvestModel>
+internal sealed class HarvestConfiguration : IEntityTypeConfiguration<HarvestModel>
 {
     public void Configure(EntityTypeBuilder<HarvestModel> builder)
     {

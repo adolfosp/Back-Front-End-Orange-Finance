@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-
-using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
+﻿using OrangeFinance.Application.Common.Interfaces.Persistence.DomainEvents;
 using OrangeFinance.Domain.Farms.Events;
 using OrangeFinance.Infrastructure.Persistence;
 
@@ -18,6 +16,6 @@ internal sealed class DomainEventsRepository : IWriteDomainEventsRepository
 
     public async Task AddAsync(FarmCreated @event)
     {
-        await _context.MongoDB.GetCollection<BsonDocument>(_collection).InsertOneAsync(@event.ToBsonDocument());
+        //await _context.MongoDB.GetCollection<BsonDocument>(_collection).InsertOneAsync(@event.ToBsonDocument());
     }
 }

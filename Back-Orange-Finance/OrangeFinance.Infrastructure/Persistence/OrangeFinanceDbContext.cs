@@ -10,6 +10,14 @@ using OrangeFinance.Infrastructure.Persistence.Interceptors;
 
 namespace OrangeFinance.Infrastructure.Persistence;
 
+/// <summary>
+/// A interface IUnitOfWork funciona porque DbContext já implementa SaveChangesAsync(), que está em IUnitOfWork. Métodos abaixos são permitidos:
+/// <code>
+/// Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+/// Task CommitAsync(CancellationToken cancellationToken = default);
+/// Task RollbackAsync(CancellationToken cancellationToken = default);
+/// </code>
+/// </summary>
 public sealed class OrangeFinanceDbContext : DbContext, IUnitOfWork
 {
     private readonly PublishDomainEventsInterceptor? _publishDomainEventsInterceptor;
