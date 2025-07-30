@@ -7,6 +7,7 @@ using GraphQL.Types;
 using OrangeFinance.Endpoints;
 
 using Scalar.AspNetCore;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace OrangeFinance.Extensions;
 
@@ -29,49 +30,33 @@ public static class Configuration
     {
         if (app.Environment.IsDevelopment())
         {
+            app.MapOpenApi();
 
-            app.UseSwagger(options =>
-            {
-                options.RouteTemplate = "openapi/{documentName}.json";
-            });
-
-            app.MapScalarApiReference(options =>
+            app.MapScalarApiReference((options, context) =>
             {
                 options
-                    .WithTitle("Orange Finance API")
                     .WithTheme(ScalarTheme.Alternate)
-                    .WithSidebar(true)
-                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-                    .WithPreferredScheme("ApiKey")
-                    .WithApiKeyAuthentication(x => x.Token = "my-api-key");
+                    .WithLayout(ScalarLayout.Classic)
+                    .WithFavicon("https://scalar.com/logo-light.svg")
+                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
             });
-            #region Exemplo antigo do swagger
-            //               .UseSwaggerUI(options =>
-            //               {
-            //#warning "Código de exemplo para adicionar a documentação de todas as versões da API. Contém erro não solucionado porque aparece apenas a v1"
-            //                   /* 
-            //                        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
-            //                       IReadOnlyList<ApiVersionDescription> apiVersionDescriptions = provider.ApiVersionDescriptions;
-
-            //                       foreach (ApiVersionDescription apiVersionDescription in apiVersionDescriptions)
-            //                       {
-            //                           options.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json", apiVersionDescription.GroupName.ToUpperInvariant());
-
-            //                       }
-            //                    */
-
-
-            //                   options.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1");
-            //                   options.SwaggerEndpoint($"/swagger/v2/swagger.json", "V2");
-
-
-            //                   options.DocExpansion(DocExpansion.List);
-
-            //               });
-            #endregion
-
         }
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+
+            // Configuração do Swagger UI
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1");
+                options.SwaggerEndpoint($"/swagger/v2/swagger.json", "V2");
+
+                options.DocExpansion(DocExpansion.List);  // Exibe as versões de forma expandida
+            });
+        }
+        ;
+
         app.UseExceptionHandler("/error");
 
         app.UseHttpsRedirection();
@@ -99,8 +84,8 @@ public static class Configuration
     public static void RegisterApiVersion(this WebApplication app)
     {
         ApiVersionSet apiVersion = app.NewApiVersionSet()
-                              .HasApiVersion(new ApiVersion(1, 0))
-                              .HasApiVersion(new ApiVersion(2, 0))
+                              .HasApiVersion(new ApiVersion(1))
+                              .HasApiVersion(new ApiVersion(2))
                               .ReportApiVersions()
                               .Build();
 

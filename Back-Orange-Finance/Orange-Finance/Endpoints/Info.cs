@@ -14,7 +14,7 @@ public static class Info
         {
             Log.Error("Testando Api Seq");
 
-        });
+        }).MapToApiVersion(1).MapToApiVersion(2).WithOpenApi();
 
         farms.MapGet("", async () =>
         {
