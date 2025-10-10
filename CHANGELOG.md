@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.4.0...v1.4.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* add correctly the config to generate swagger e scalar ui ([ae2151c](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/ae2151cafd5d43962897751a0b170c50809c934e))
+
 # [1.4.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.3.17...v1.4.0) (2025-07-28)
 
 
