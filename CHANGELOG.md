@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.4.1...v1.5.0) (2025-10-10)
+
+
+### Features
+
+* add ASPIRE ([589e3ef](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/589e3ef37c4969f40c3b9ed43edefdad89e02727))
+
 ## [1.4.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.4.0...v1.4.1) (2025-07-30)
 
 
