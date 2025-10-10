@@ -59,7 +59,11 @@ internal static class OpenTelemetry
                     .AddHttpClientInstrumentation()
                     .AddOtlpExporter(opts =>
                     {
-                        opts.Endpoint = new Uri("http://localhost:4317");
+                        /*CONFIGURAÇÃO PARA O ASPIRE*/
+                        var urlOTLPAspire = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
+                        opts.Endpoint = new Uri(urlOTLPAspire!);
+
+                        //opts.Endpoint = new Uri("http://localhost:4317");
                     });
             });
     }

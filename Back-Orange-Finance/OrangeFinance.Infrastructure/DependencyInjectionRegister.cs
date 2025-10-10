@@ -31,8 +31,13 @@ public static class DependencyInjectionRegister
         var postgresSettings = new PostgresSettings();
         configuration.Bind(PostgresSettings.SectionName, postgresSettings);
 
+        //services.AddDbContext<OrangeFinanceDbContext>(options =>
+        //    options.UseNpgsql(postgresSettings.ConnectionString));
+
+        /*CONFIGURAÇÃO PARA O ASPIRE*/
+        var urlPostgresAspire = configuration.GetConnectionString("mainDB");
         services.AddDbContext<OrangeFinanceDbContext>(options =>
-            options.UseNpgsql(postgresSettings.ConnectionString));
+            options.UseNpgsql(urlPostgresAspire));
 
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
         services.AddSingleton(new RedisDBContext(redisSettings.ConnectionString));

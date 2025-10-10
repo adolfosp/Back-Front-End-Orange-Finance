@@ -7,9 +7,18 @@ internal static class LogConfiguration
 {
     public static void AddLogConfiguration(this WebApplicationBuilder builder)
     {
+        //builder.Host.UseSerilog((context, services, configuration) =>
+        //{
+        //    configuration.ReadFrom.Configuration(context.Configuration);
+        //});
+
+        /*CONFIGURAÇÃO PARA O ASPIRE*/
         builder.Host.UseSerilog((context, services, configuration) =>
         {
-            configuration.ReadFrom.Configuration(context.Configuration);
+            var urlSeqAspire = builder.Configuration.GetConnectionString("seq");
+
+            configuration.WriteTo.Seq(urlSeqAspire!);
+
         });
     }
 

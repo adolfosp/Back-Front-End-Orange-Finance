@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker-Orange-Finance", "Wo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeFinance.Adapters", "OrangeFinance.Adapters\OrangeFinance.Adapters.csproj", "{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.AppHost", "..\AspireApp\AspireApp.AppHost\AspireApp.AppHost.csproj", "{BDA93296-A7FA-46AA-91AB-D2E873E12B96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireApp.ServiceDefaults", "..\AspireApp\AspireApp.ServiceDefaults\AspireApp.ServiceDefaults.csproj", "{30D1B0EA-3D6A-12A8-881B-8F38BA294566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9A53FB2-690D-4CC6-92E9-45C8BEFA9BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA93296-A7FA-46AA-91AB-D2E873E12B96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA93296-A7FA-46AA-91AB-D2E873E12B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA93296-A7FA-46AA-91AB-D2E873E12B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA93296-A7FA-46AA-91AB-D2E873E12B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D1B0EA-3D6A-12A8-881B-8F38BA294566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D1B0EA-3D6A-12A8-881B-8F38BA294566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D1B0EA-3D6A-12A8-881B-8F38BA294566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D1B0EA-3D6A-12A8-881B-8F38BA294566}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

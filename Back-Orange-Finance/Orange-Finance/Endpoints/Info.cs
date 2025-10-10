@@ -4,8 +4,11 @@ using System.Net.NetworkInformation;
 
 namespace OrangeFinance.Endpoints;
 
+
 public static class Info
 {
+    public static Guid GuidMachine = Guid.NewGuid();
+
     public static void RegisterInfoEndpoints(this IEndpointRouteBuilder routes)
     {
         var farms = routes.MapGroup("/info");
@@ -18,11 +21,12 @@ public static class Info
 
         farms.MapGet("", async () =>
         {
-            var machineName = Environment.MachineName;
+            var machineName = GuidMachine;
             var osVersion = Environment.OSVersion.ToString();
             var ipAddress = GetLocalIPAddress();
             var macAddress = GetMacAddress();
             var processId = Environment.ProcessId;
+            Log.Information("Consultando rota info");
 
             return (new
             {

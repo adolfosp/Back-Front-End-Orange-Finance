@@ -15,7 +15,7 @@ public static class CreateDatabase
                 using var context = scope.ServiceProvider.GetRequiredService<OrangeFinanceDbContext>();
                 context.Database.EnsureCreated();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
