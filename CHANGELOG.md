@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.0...v1.5.1) (2025-11-04)
+
+
+### Bug Fixes
+
+* add adjust to run aspire only debug ([dd3ef13](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/dd3ef13fc1949b8ac9a39a7cc1e7133fbe2049b1))
+
 # [1.5.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.4.1...v1.5.0) (2025-10-10)
 
 
