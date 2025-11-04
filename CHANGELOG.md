@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.6.0...v1.6.1) (2025-11-04)
+
+
+### Bug Fixes
+
+* add validation to execute from docker-compose, aspire and on production ([43c1c2f](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/43c1c2f8cbd3e73a478132c4670cc346f4d6629e))
+
 # [1.6.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.3...v1.6.0) (2025-11-04)
 
 
