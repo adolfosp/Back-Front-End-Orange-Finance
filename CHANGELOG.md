@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.3...v1.6.0) (2025-11-04)
+
+
+### Features
+
+* add audit logs ([8775f5f](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/8775f5f4ada0b5c67be0ed49aa76ca07a98f747e))
+
 ## [1.5.3](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.2...v1.5.3) (2025-11-04)
 
 
