@@ -22,7 +22,7 @@ try
 
     builder.Services.AddPresentation();
     builder.Services.AddApplication();
-    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddInfrastructure(builder);
 
     builder.Services.AddProblemDetails();
 
@@ -37,6 +37,7 @@ try
     /*App*/
 
     var app = builder.Build();
+
     app.RegisterMiddlewares();
 
     app.EnsureCreatedDatabase();

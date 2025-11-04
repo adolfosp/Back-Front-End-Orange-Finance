@@ -1,7 +1,7 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using OrangeFinance.Adapters;
 using OrangeFinance.Adapters.Configuration;
 using OrangeFinance.Adapters.Serialization;
@@ -20,24 +20,39 @@ namespace OrangeFinance.Infrastructure;
 
 public static class DependencyInjectionRegister
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, WebApplicationBuilder builder)
     {
         var mongoSettings = new MongoDBSettings();
-        configuration.Bind(MongoDBSettings.SectionName, mongoSettings);
+        builder.Configuration.Bind(MongoDBSettings.SectionName, mongoSettings);
+
+#if DEBUG
+        Console.WriteLine("Modo Debug: Redis.");
+        var redisSettings = new RedisSettings
+        {
+            ConnectionString = builder.Configuration.GetConnectionString("cache")
+        };
+
+#else
+        Console.WriteLine("Modo Produção: Redis.");
 
         var redisSettings = new RedisSettings();
         configuration.Bind(RedisSettings.SectionName, redisSettings);
+#endif
+
+#if DEBUG
+        Console.WriteLine("Modo Debug: Postgres.");
+        var urlPostgresAspire = builder.Configuration.GetConnectionString("mainDB");
+        services.AddDbContext<OrangeFinanceDbContext>(options =>
+            options.UseNpgsql(urlPostgresAspire));
+#else
+        Console.WriteLine("Modo Produção: Postgres.");
 
         var postgresSettings = new PostgresSettings();
         configuration.Bind(PostgresSettings.SectionName, postgresSettings);
-
-        //services.AddDbContext<OrangeFinanceDbContext>(options =>
-        //    options.UseNpgsql(postgresSettings.ConnectionString));
-
-        /*CONFIGURAÇÃO PARA O ASPIRE*/
-        var urlPostgresAspire = configuration.GetConnectionString("mainDB");
         services.AddDbContext<OrangeFinanceDbContext>(options =>
-            options.UseNpgsql(urlPostgresAspire));
+                options.UseNpgsql(postgresSettings.ConnectionString));
+#endif
+
 
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
         services.AddSingleton(new RedisDBContext(redisSettings.ConnectionString));
@@ -54,8 +69,13 @@ public static class DependencyInjectionRegister
         services.AddScoped<IUnitOfWork>(c => c.GetRequiredService<OrangeFinanceDbContext>());
 
         #region RabbitMQ
-        services.AddRabbitMQ(cfg => cfg.WithExchange(ExchangeQueueConfigurationFactory.CreateFarmExchangeConfiguration()).WithConfiguration(configuration)
+
+
+        services.AddRabbitMQ(cfg => cfg.WithExchange(ExchangeQueueConfigurationFactory.CreateFarmExchangeConfiguration()).WithConfiguration(builder.Configuration)
                                        .WithSerializer<SystemTextJsonAmqpSerializer>());
+
+
+
 
         services.AddAmqpRpcClient();
         #endregion
