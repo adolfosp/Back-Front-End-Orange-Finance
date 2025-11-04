@@ -36,7 +36,7 @@ public static class DependencyInjectionRegister
         Console.WriteLine("Modo Produção: Redis.");
 
         var redisSettings = new RedisSettings();
-         builder.Configuration.Bind(RedisSettings.SectionName, redisSettings);
+        builder.Configuration.Bind(RedisSettings.SectionName, redisSettings);
 #endif
 
 #if DEBUG
@@ -48,7 +48,7 @@ public static class DependencyInjectionRegister
         Console.WriteLine("Modo Produção: Postgres.");
 
         var postgresSettings = new PostgresSettings();
-        configuration.Bind(PostgresSettings.SectionName, postgresSettings);
+        builder.Configuration.Bind(PostgresSettings.SectionName, postgresSettings);
         services.AddDbContext<OrangeFinanceDbContext>(options =>
                 options.UseNpgsql(postgresSettings.ConnectionString));
 #endif
