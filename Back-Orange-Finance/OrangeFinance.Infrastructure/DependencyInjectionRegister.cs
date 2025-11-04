@@ -36,7 +36,7 @@ public static class DependencyInjectionRegister
         Console.WriteLine("Modo Produção: Redis.");
 
         var redisSettings = new RedisSettings();
-        configuration.Bind(RedisSettings.SectionName, redisSettings);
+         builder.Configuration.Bind(RedisSettings.SectionName, redisSettings);
 #endif
 
 #if DEBUG
