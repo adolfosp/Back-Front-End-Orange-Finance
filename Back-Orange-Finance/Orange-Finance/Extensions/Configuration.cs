@@ -18,6 +18,7 @@ public static class Configuration
 
         builder.AddLogConfiguration();
 
+        Console.WriteLine("--Comecando o AddOpenTelemetry");
         builder.AddOpenTelemetry(builder.Configuration);
 
         builder.Services.AddHttpContextAccessor();

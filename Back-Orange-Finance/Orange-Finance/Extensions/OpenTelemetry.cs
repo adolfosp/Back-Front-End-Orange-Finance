@@ -61,11 +61,22 @@ internal static class OpenTelemetry
                     {
 
 #if DEBUG
-                        Console.WriteLine("Modo Debug: OTLP.");
+                        Console.WriteLine("---Modo Debug: AddOtlpExporter.");
                         var urlOTLPAspire = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
-                        opts.Endpoint = new Uri(urlOTLPAspire!);
+
+                        if (string.IsNullOrEmpty(urlOTLPAspire))
+                        {
+                            Console.WriteLine("----Modo Docker-Compose: AddOtlpExporter.");
+                            opts.Endpoint = new Uri("http://localhost:4317");
+                        }
+                        else
+                        {
+                            Console.WriteLine("----Modo ASPIRE: AddOtlpExporter.");
+                            opts.Endpoint = new Uri(urlOTLPAspire!);
+
+                        }
 #else
-                        Console.WriteLine("Modo Produção: OTLP.");
+                        Console.WriteLine("Modo Produção: AddOtlpExporter.");
 
                         opts.Endpoint = new Uri("http://localhost:4317");
 

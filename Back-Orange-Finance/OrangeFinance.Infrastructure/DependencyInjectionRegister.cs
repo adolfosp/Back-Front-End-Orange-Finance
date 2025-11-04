@@ -27,13 +27,18 @@ public static class DependencyInjectionRegister
 
 #if DEBUG
         Console.WriteLine("--Modo Debug: Redis.");
+        var redisConnection = builder.Configuration.GetConnectionString("cache");
+        if (string.IsNullOrEmpty(redisConnection))
+            redisConnection = redisConnection = builder.Configuration.GetSection("RedisSettings")
+                                                                     .GetValue<string>("ConnectionString");
+
         var redisSettings = new RedisSettings
         {
-            ConnectionString = builder.Configuration.GetConnectionString("cache")
+            ConnectionString = redisConnection!
         };
 
 #else
-        Console.WriteLine("Modo Produção: Redis.");
+        Console.WriteLine("--Modo Produção: Redis.");
 
         var redisSettings = new RedisSettings();
         builder.Configuration.Bind(RedisSettings.SectionName, redisSettings);
@@ -41,11 +46,16 @@ public static class DependencyInjectionRegister
 
 #if DEBUG
         Console.WriteLine("--Modo Debug: Postgres.");
+
         var urlPostgresAspire = builder.Configuration.GetConnectionString("mainDB");
+
+        if (string.IsNullOrEmpty(urlPostgresAspire))
+            urlPostgresAspire = builder.Configuration.GetSection(PostgresSettings.SectionName).GetValue<string>("ConnectionString"); ;
+
         services.AddDbContext<OrangeFinanceDbContext>(options =>
             options.UseNpgsql(urlPostgresAspire));
 #else
-        Console.WriteLine("Modo Produção: Postgres.");
+        Console.WriteLine("--Modo Produção: Postgres.");
 
         var postgresSettings = new PostgresSettings();
         builder.Configuration.Bind(PostgresSettings.SectionName, postgresSettings);

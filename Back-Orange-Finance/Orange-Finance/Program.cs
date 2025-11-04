@@ -33,6 +33,8 @@ try
 
     builder.AddJwtAuthentication();
     builder.AddClientsFactory();
+
+    Console.WriteLine("-Comecando o RegisterServices");
     builder.RegisterServices();
 
     Log.Information("Starting up application");

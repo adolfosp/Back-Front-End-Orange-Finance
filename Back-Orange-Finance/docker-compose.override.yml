@@ -22,7 +22,7 @@ services:
       - app_network
 
   postgres:
-    image: postgres:latest
+    image: postgres:18
     container_name: "postgres"
     environment:
       POSTGRES_USER: postgres
@@ -33,7 +33,7 @@ services:
     networks:
       - app_network
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/18/main
 
   jaeger:
     image: jaegertracing/opentelemetry-all-in-one
