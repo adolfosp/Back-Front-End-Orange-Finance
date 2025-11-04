@@ -20,8 +20,13 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    Console.WriteLine("-Comecando o AddPresentation");
     builder.Services.AddPresentation();
+
+    Console.WriteLine("-Comecando o AddApplication");
     builder.Services.AddApplication();
+
+    Console.WriteLine("-Comecando o AddInfrastructure");
     builder.Services.AddInfrastructure(builder);
 
     builder.Services.AddProblemDetails();

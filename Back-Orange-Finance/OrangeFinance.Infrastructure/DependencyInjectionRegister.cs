@@ -26,7 +26,7 @@ public static class DependencyInjectionRegister
         builder.Configuration.Bind(MongoDBSettings.SectionName, mongoSettings);
 
 #if DEBUG
-        Console.WriteLine("Modo Debug: Redis.");
+        Console.WriteLine("--Modo Debug: Redis.");
         var redisSettings = new RedisSettings
         {
             ConnectionString = builder.Configuration.GetConnectionString("cache")
@@ -40,7 +40,7 @@ public static class DependencyInjectionRegister
 #endif
 
 #if DEBUG
-        Console.WriteLine("Modo Debug: Postgres.");
+        Console.WriteLine("--Modo Debug: Postgres.");
         var urlPostgresAspire = builder.Configuration.GetConnectionString("mainDB");
         services.AddDbContext<OrangeFinanceDbContext>(options =>
             options.UseNpgsql(urlPostgresAspire));
@@ -53,7 +53,7 @@ public static class DependencyInjectionRegister
                 options.UseNpgsql(postgresSettings.ConnectionString));
 #endif
 
-
+        Console.WriteLine("--Comecando o MongoDB");
         services.AddSingleton(serviceProvider => new MongoDBContext(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
         services.AddSingleton(new RedisDBContext(redisSettings.ConnectionString));
         services.AddSingleton<ICacheRepository, CacheRepository>();
@@ -70,7 +70,7 @@ public static class DependencyInjectionRegister
 
         #region RabbitMQ
 
-
+        Console.WriteLine("--Comecando o RabbitMQ");
         services.AddRabbitMQ(cfg => cfg.WithExchange(ExchangeQueueConfigurationFactory.CreateFarmExchangeConfiguration()).WithConfiguration(builder.Configuration)
                                        .WithSerializer<SystemTextJsonAmqpSerializer>());
 
@@ -80,6 +80,7 @@ public static class DependencyInjectionRegister
         services.AddAmqpRpcClient();
         #endregion
 
+        Console.WriteLine("--Finalizando Infra");
 
         return services;
     }

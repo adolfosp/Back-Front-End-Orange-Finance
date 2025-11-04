@@ -8,17 +8,16 @@ public static class CreateDatabase
     public static void EnsureCreatedDatabase(
      this WebApplication web)
     {
-        using (var scope = web.Services.CreateScope())
+        using var scope = web.Services.CreateScope();
+        try
         {
-            try
-            {
-                using var context = scope.ServiceProvider.GetRequiredService<OrangeFinanceDbContext>();
-                context.Database.EnsureCreated();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            using var context = scope.ServiceProvider.GetRequiredService<OrangeFinanceDbContext>();
+            context.Database.EnsureCreated();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao criar o Database: {ex.Message}");
+            throw;
         }
     }
 }
