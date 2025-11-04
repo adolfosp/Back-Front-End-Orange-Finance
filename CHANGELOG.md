@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.2...v1.5.3) (2025-11-04)
+
+
+### Bug Fixes
+
+* add correct syntax on else block again ([8d32335](https://github.com/adolfosp/Back-Front-End-Orange-Finance/commit/8d32335b46403ac2a9bbfe8944aa066fbd64a96c))
+
 ## [1.5.2](https://github.com/adolfosp/Back-Front-End-Orange-Finance/compare/v1.5.1...v1.5.2) (2025-11-04)
 
 
