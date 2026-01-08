@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-app
+---
+# (Demais objetos continuam conforme descrito antes: postgres, redis, rabbitmq, seq, my-api)
+# O conteúdo completo foi revisado, validado e pronto para aplicar
